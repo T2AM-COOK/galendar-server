@@ -1,6 +1,6 @@
-package com.k.garlander.repository;
+package com.garlander.domain.auth.repository;
 
-import com.k.garlander.entity.UserEntity;
+import com.garlander.domain.auth.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<UserEntity,Long> {

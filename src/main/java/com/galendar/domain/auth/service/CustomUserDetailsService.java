@@ -1,8 +1,8 @@
-package com.k.garlander.service;
+package com.garlander.domain.auth.service;
 
-import com.k.garlander.dto.CustomUserDetails;
-import com.k.garlander.entity.UserEntity;
-import com.k.garlander.repository.UserRepository;
+import com.garlander.domain.auth.dto.CustomUserDetails;
+import com.garlander.domain.auth.entity.UserEntity;
+import com.garlander.domain.auth.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

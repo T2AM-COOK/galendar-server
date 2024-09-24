@@ -1,4 +1,4 @@
-package com.k.garlander.entity;
+package com.garlander.domain.auth.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;

@@ -1,8 +1,8 @@
-package com.k.garlander.config;
+package com.garlander.global.config;
 
-import com.k.garlander.jwt.JwtFilter;
-import com.k.garlander.jwt.JwtUtil;
-import com.k.garlander.jwt.LoginFilter;
+import com.garlander.global.jwt.JwtFilter;
+import com.garlander.global.jwt.JwtUtil;
+import com.garlander.global.jwt.LoginFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -26,9 +26,7 @@ import java.util.Collections;
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
-
     private final JwtUtil jwtUtil;
-
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -37,7 +35,6 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-
         return configuration.getAuthenticationManager();
     }
 
@@ -50,37 +47,38 @@ public class SecurityConfig {
                             @Override
                             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                                 CorsConfiguration configuration = new CorsConfiguration();
-
                                 configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
                                 configuration.setAllowedMethods(Collections.singletonList("*"));
                                 configuration.setAllowCredentials(true);
                                 configuration.setAllowedHeaders(Collections.singletonList("*"));
                                 configuration.setMaxAge(3600L);
-
                                 configuration.setExposedHeaders(Collections.singletonList("Authorization"));
-
                                 return configuration;
                             }
                         }));
 
         http
-                .csrf((auth) -> auth.disable());
-        http
-                .formLogin((auth) -> auth.disable());
-        http
-                .httpBasic((auth)->auth.disable());
-        http
-                .authorizeHttpRequests((auth)->auth
-                        .requestMatchers("/login","/","/join").permitAll()
-                        .requestMatchers("admin").hasRole("ADMIN")
-                        .anyRequest().authenticated());
-        http
-                .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class);
-        http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),jwtUtil), UsernamePasswordAuthenticationFilter.class);
+                .csrf((auth) -> auth.disable())
+                .formLogin((auth) -> auth.disable())
+                .httpBasic((auth) -> auth.disable());
 
         http
-                .sessionManagement((session)->session
+                .authorizeHttpRequests((auth) -> auth
+                        // Swagger 관련 경로 허용
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                        // 로그인, 홈, 회원가입 경로 허용
+                        .requestMatchers("/login", "/", "/join").permitAll()
+                        // ADMIN 권한 필요
+                        .requestMatchers("admin").hasRole("ADMIN")
+                        // 나머지 모든 요청 인증 필요
+                        .anyRequest().authenticated());
+
+        http
+                .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class)
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+
+        http
+                .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();

@@ -1,6 +1,6 @@
-package com.k.garlander.dto;
+package com.garlander.domain.auth.dto;
 
-import com.k.garlander.entity.UserEntity;
+import com.garlander.domain.auth.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
