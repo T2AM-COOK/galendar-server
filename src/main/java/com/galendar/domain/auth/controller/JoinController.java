@@ -1,7 +1,7 @@
-package com.garlander.domain.auth.controller;
+package com.galendar.domain.auth.controller;
 
-import com.garlander.domain.auth.dto.JoinDto;
-import com.garlander.domain.auth.service.JoinService;
+import com.galendar.domain.auth.dto.JoinDto;
+import com.galendar.domain.auth.service.JoinService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.stereotype.Controller;

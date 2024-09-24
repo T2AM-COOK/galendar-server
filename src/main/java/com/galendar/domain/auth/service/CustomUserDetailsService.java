@@ -1,8 +1,8 @@
-package com.garlander.domain.auth.service;
+package com.galendar.domain.auth.service;
 
-import com.garlander.domain.auth.dto.CustomUserDetails;
-import com.garlander.domain.auth.entity.UserEntity;
-import com.garlander.domain.auth.repository.UserRepository;
+import com.galendar.domain.auth.dto.CustomUserDetails;
+import com.galendar.domain.auth.entity.UserEntity;
+import com.galendar.domain.auth.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

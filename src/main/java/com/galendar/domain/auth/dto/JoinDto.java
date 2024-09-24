@@ -1,4 +1,4 @@
-package com.garlander.domain.auth.dto;
+package com.galendar.domain.auth.dto;
 
 import lombok.Getter;
 import lombok.Setter;

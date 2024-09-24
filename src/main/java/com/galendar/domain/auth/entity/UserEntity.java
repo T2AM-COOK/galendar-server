@@ -1,4 +1,4 @@
-package com.garlander.domain.auth.entity;
+package com.galendar.domain.auth.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
