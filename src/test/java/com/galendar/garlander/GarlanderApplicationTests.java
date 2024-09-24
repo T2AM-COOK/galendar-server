@@ -1,4 +1,4 @@
-package com.k.garlander;
+package com.galendar.garlander;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

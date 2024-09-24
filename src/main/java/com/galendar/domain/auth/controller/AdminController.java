@@ -1,4 +1,4 @@
-package com.garlander.domain.auth.controller;
+package com.galendar.domain.auth.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,8 +1,8 @@
-package com.garlander.global.config;
+package com.galendar.global.config;
 
-import com.garlander.global.jwt.JwtFilter;
-import com.garlander.global.jwt.JwtUtil;
-import com.garlander.global.jwt.LoginFilter;
+import com.galendar.global.jwt.JwtFilter;
+import com.galendar.global.jwt.JwtUtil;
+import com.galendar.global.jwt.LoginFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

@@ -1,7 +1,7 @@
-package com.garlander.global.jwt;
+package com.galendar.global.jwt;
 
-import com.garlander.domain.auth.dto.CustomUserDetails;
-import com.garlander.domain.auth.entity.UserEntity;
+import com.galendar.domain.auth.dto.CustomUserDetails;
+import com.galendar.domain.auth.entity.UserEntity;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
