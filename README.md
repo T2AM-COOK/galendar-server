@@ -1,1 +1,1 @@
-# Galendar-Server
+# galendar-server

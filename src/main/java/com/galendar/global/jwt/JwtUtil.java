@@ -1,4 +1,4 @@
-package com.k.garlander.jwt;
+package com.garlander.global.jwt;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,5 +1,7 @@
-package com.k.garlander.controller;
+package com.garlander.domain.auth.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Collection;
 import java.util.Iterator;
 
+@Tag(name = "Main", description = "")
 @Controller
 @ResponseBody
 public class MainController {
+    @Operation(summary = "JWT로그인")
     @GetMapping("/")
     public String mainP(){
 

@@ -1,9 +1,8 @@
-package com.k.garlander.service;
+package com.garlander.domain.auth.service;
 
-import com.k.garlander.dto.JoinDto;
-import com.k.garlander.entity.UserEntity;
-import com.k.garlander.repository.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.garlander.domain.auth.dto.JoinDto;
+import com.garlander.domain.auth.entity.UserEntity;
+import com.garlander.domain.auth.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

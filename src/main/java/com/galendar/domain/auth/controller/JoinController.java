@@ -1,11 +1,14 @@
-package com.k.garlander.controller;
+package com.garlander.domain.auth.controller;
 
-import com.k.garlander.dto.JoinDto;
-import com.k.garlander.service.JoinService;
+import com.garlander.domain.auth.dto.JoinDto;
+import com.garlander.domain.auth.service.JoinService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Tag(name = "Join", description = "")
 @Controller
 @ResponseBody
 public class JoinController {
@@ -15,7 +18,7 @@ public class JoinController {
     public JoinController(JoinService joinService) {
         this.joinService = joinService;
     }
-
+    @Operation(summary = "가입")
     @PostMapping("/join")
     public String joinProcess(JoinDto joinDto){
 
