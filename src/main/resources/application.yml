@@ -2,6 +2,27 @@ server:
   port: 8080
 
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USER}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  application:
+    name: garlander
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      password: ${REDIS_PASSWORD}
+      port: ${REDIS_PORT}
+
   datasource:
     url: jdbc:mysql://localhost:3306/garlander
     username: root
@@ -10,8 +31,15 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
 
   jwt:
-    secret: d0dde67a111b6a000b2eeaedbf0756538051784a199e143f4b70043d628f9154
-    expiration: 86400000  # JWT ?? ?? (??? ??, ?: 1?)
+    access:
+        expiration: ${ACCESS_END}  # 아직 공백
+    refresh:
+        expiration: ${REFRESH_END}
+    secret: ${JWT_KEY}
