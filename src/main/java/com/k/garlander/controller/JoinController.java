@@ -1,6 +1,6 @@
 package com.k.garlander.controller;
 
-import com.k.garlander.dto.JoinDto;
+import com.k.garlander.dto.JoinDTO;
 import com.k.garlander.service.JoinService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,7 @@ public class JoinController {
     }
 
     @PostMapping("/join")
-    public String joinProcess(JoinDto joinDto){
+    public String joinProcess(JoinDTO joinDto){
 
         joinService.joinProcess(joinDto);
 

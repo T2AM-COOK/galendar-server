@@ -1,9 +1,8 @@
 package com.k.garlander.service;
 
-import com.k.garlander.dto.JoinDto;
+import com.k.garlander.dto.JoinDTO;
 import com.k.garlander.entity.UserEntity;
 import com.k.garlander.repository.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ public class JoinService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public void joinProcess(JoinDto joinDto){
+    public void joinProcess(JoinDTO joinDto){
         String userName = joinDto.getUserName();
         String passWord = joinDto.getPassWord();
 
