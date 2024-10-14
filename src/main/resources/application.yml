@@ -12,6 +12,6 @@ spring:
     hibernate:
       ddl-auto: none
 
-  jwt:
-    secret: d0dde67a111b6a000b2eeaedbf0756538051784a199e143f4b70043d628f9154
-    expiration: 86400000  # JWT ?? ?? (??? ??, ?: 1?)
+jwt:
+  secret: d0dde67a111b6a000b2eeaedbf0756538051784a199e143f4b70043d628f9154
+  expiration: 86400000  # JWT ?? ?? (??? ??, ?: 1?)
