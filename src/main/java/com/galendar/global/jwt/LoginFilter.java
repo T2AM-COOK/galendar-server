@@ -1,6 +1,6 @@
 package com.galendar.global.jwt;
 
-import com.galendar.domain.auth.dto.CustomUserDetails;
+import com.galendar.global.jwt.provider.CustomUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

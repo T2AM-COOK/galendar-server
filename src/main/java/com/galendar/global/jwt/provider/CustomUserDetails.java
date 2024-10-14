@@ -1,4 +1,4 @@
-package com.galendar.domain.auth.dto;
+package com.galendar.global.jwt.provider;
 
 import com.galendar.domain.auth.entity.UserEntity;
 import lombok.RequiredArgsConstructor;

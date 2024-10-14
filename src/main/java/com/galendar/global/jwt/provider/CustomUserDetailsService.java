@@ -1,6 +1,5 @@
-package com.galendar.domain.auth.service;
+package com.galendar.global.jwt.provider;
 
-import com.galendar.domain.auth.dto.CustomUserDetails;
 import com.galendar.domain.auth.entity.UserEntity;
 import com.galendar.domain.auth.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
