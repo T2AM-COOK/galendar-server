@@ -11,7 +11,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
 
   jwt:
     secret: d0dde67a111b6a000b2eeaedbf0756538051784a199e143f4b70043d628f9154
-    expiration: 86400000  # JWT ?? ?? (??? ??, ?: 1?)
+    expiration: 900000  # 15min
+    refreshExpiration: 86400000 # 1day

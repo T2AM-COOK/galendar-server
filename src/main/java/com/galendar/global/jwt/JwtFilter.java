@@ -1,7 +1,6 @@
 package com.galendar.global.jwt;
 
-import com.galendar.domain.auth.dto.CustomUserDetails;
-import com.galendar.domain.auth.entity.UserEntity;
+import com.galendar.domain.user.entity.UserEntity;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+@Deprecated
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
@@ -22,36 +22,36 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        String authorization = request.getHeader("Authorization");
-
-        if(authorization == null || !authorization.startsWith("Bearer")){
-            filterChain.doFilter(request,response);
-
-            return;
-        }
-
-        String token = authorization.split(" ")[1];
-
-        if (jwtUtil.isExpired(token)){
-            filterChain.doFilter(request, response);
-
-            return;
-        }
-
-        String userName = jwtUtil.getUserName(token);
-        String role = jwtUtil.getRole(token);
-
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserName(userName);
-        userEntity.setRole(role);
-        userEntity.setPassWord("temppassword");
-
-        CustomUserDetails customUserDetails = new CustomUserDetails(userEntity);
-
-        Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
-
-        SecurityContextHolder.getContext().setAuthentication(authToken);
-
-        filterChain.doFilter(request,response);
+//        String authorization = request.getHeader("Authorization");
+//
+//        if(authorization == null || !authorization.startsWith("Bearer")){
+//            filterChain.doFilter(request,response);
+//
+//            return;
+//        }
+//
+//        String token = authorization.split(" ")[1];
+//
+//        if (jwtUtil.isExpired(token)){
+//            filterChain.doFilter(request, response);
+//
+//            return;
+//        }
+//
+//        String userName = jwtUtil.getUserName(token);
+//        String role = jwtUtil.getRole(token);
+//
+//        UserEntity userEntity = new UserEntity();
+//        userEntity.setUserName(userName);
+//        userEntity.setRole(role);
+//        userEntity.setPassWord("temppassword");
+//
+//        CustomUserDetails customUserDetails = new CustomUserDetails(userEntity);
+//
+//        Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
+//
+//        SecurityContextHolder.getContext().setAuthentication(authToken);
+//
+//        filterChain.doFilter(request,response);
     }
 }

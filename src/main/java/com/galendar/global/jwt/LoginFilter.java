@@ -1,6 +1,5 @@
 package com.galendar.global.jwt;
 
-import com.galendar.domain.auth.dto.CustomUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,7 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.util.Collection;
 import java.util.Iterator;
-
+@Deprecated
 @RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -35,18 +34,18 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) {
-        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        String userName = customUserDetails.getUsername();
-
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
-        GrantedAuthority auth = iterator.next();
-
-        String role = auth.getAuthority();
-
-        String token = jwtUtil.createJwt(userName, role, 60*60*10L);
-
-        response.addHeader("Authorization", "Bearer " + token);
+//        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+//        String userName = customUserDetails.getUsername();
+//
+//        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+//        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
+//        GrantedAuthority auth = iterator.next();
+//
+//        String role = auth.getAuthority();
+//
+//        String token = jwtUtil.createJwt(userName, role, 60*60*10L);
+//
+//        response.addHeader("Authorization", "Bearer " + token);
 
     }
 

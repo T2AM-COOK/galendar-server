@@ -3,11 +3,18 @@ package com.galendar.global.config;
 import com.galendar.global.jwt.JwtFilter;
 import com.galendar.global.jwt.JwtUtil;
 import com.galendar.global.jwt.LoginFilter;
+import com.galendar.global.jwt.filter.JwtAuthenticationFilter;
+import com.galendar.global.jwt.filter.JwtExceptionFilter;
+import com.galendar.global.security.CustomUserDetailsService;
+import com.galendar.global.security.handler.JwtAccessDeniedHandler;
+import com.galendar.global.security.handler.JwtAuthenticationEntryPoint;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,11 +32,11 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final AuthenticationConfiguration authenticationConfiguration;
-    private final JwtUtil jwtUtil;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final CustomUserDetailsService customUserDetailsService;
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -39,10 +46,18 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(customUserDetailsService);
+        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
+        return daoAuthenticationProvider;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                .cors((cors)->cors
+                .cors((cors) -> cors
                         .configurationSource(new CorsConfigurationSource() {
                             @Override
                             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
@@ -68,14 +83,22 @@ public class SecurityConfig {
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         // 로그인, 홈, 회원가입 경로 허용
                         .requestMatchers("/login", "/", "/join").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
                         // ADMIN 권한 필요
                         .requestMatchers("admin").hasRole("ADMIN")
                         // 나머지 모든 요청 인증 필요
                         .anyRequest().authenticated());
 
         http
-                .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class)
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtExceptionFilter(), JwtAuthenticationFilter.class);
+
+        http
+                .exceptionHandling(
+                        handlingConfigurer -> handlingConfigurer
+                                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+                                .accessDeniedHandler(new JwtAccessDeniedHandler())
+                );
 
         http
                 .sessionManagement((session) -> session
