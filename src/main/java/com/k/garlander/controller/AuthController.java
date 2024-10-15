@@ -1,10 +1,8 @@
 package com.k.garlander.controller;
 
 import com.k.garlander.dto.UserDTO;
-import com.k.garlander.entity.UserEntity;
-import com.k.garlander.service.AuthCodeService;
-import com.k.garlander.service.RefreshTokenService;
-import com.k.garlander.service.UserService;
+import com.k.garlander.dto.req.RegisterRequest;
+import com.k.garlander.service.*;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,14 +32,8 @@ public class AuthController {
             description = "인증된 이메일만 회원가입이 가능합니다."
     )
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserDTO user) {
-        try {
-            UserEntity userEntity = userService.register(user);
-
-            return ResponseEntity.ok(userEntity);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<UserResponse> register(@RequestBody RegisterRequest user) {
+        return ResponseEntity.ok().body(userService.register(user));
     }
 
     @Operation(
@@ -82,15 +74,8 @@ public class AuthController {
             @ApiImplicitParam(name = "code", value = "인증코드", required = true, dataType = "string", paramType = "parameter")
     })
     @PostMapping("/verify-code")
-    public Boolean verifyAuthCode(@RequestParam(name = "email") String email, @RequestParam(name = "code") String code) throws NoSuchAlgorithmException {
-        boolean isVerified = authCodeService.verifyAuthCode(email, code);
-        if (isVerified) {
-            authCodeService.saveVerified {
-                authCodeService.saveVerifiedEmail(email);
-            }
-            returnEmail(email);
-        }
-        return isVerified;
+    public void verifyAuthCode(@RequestParam(name = "email") String email, @RequestParam(name = "code") String code) throws NoSuchAlgorithmException {
+        authCodeService.verifyAuthCode(email, code);
     }
 
     @Operation(
@@ -119,7 +104,7 @@ public class AuthController {
             description = "학교 변경은 제외합니다."
     )
     @PatchMapping("/me")
-    public ResponseEntity<?> updateMe(@RequestBody UpdateUserDTO user) {
+    public ResponseEntity<UserResponse> updateMe(@RequestBody UpdateUserRequest user) {
         return ResponseEntity.ok(userService.updateMe(user));
     }
 }

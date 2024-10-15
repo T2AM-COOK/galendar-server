@@ -1,64 +1,54 @@
 package com.k.garlander.service;
 
 import com.k.garlander.config.UserAuthHolder;
+import com.k.garlander.dto.req.RegisterRequest;
 import com.k.garlander.entity.UserEntity;
+import com.k.garlander.entity.enums.Role;
+import com.k.garlander.exception.CustomConflictException;
 import com.k.garlander.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.redis.core.RedisTemplate;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
-    private final RedisTemplate<String, Object> redisTemplate2;
     private final UserAuthHolder userAuthHolder;
-
-    public UserService(@Qualifier("redisTemplate2")
-                       RedisTemplate<String, Object> redisTemplate2,
-                       BCryptPasswordEncoder bCryptPasswordEncoder,
-                       UserRepository userRepository, UserAuthHolder userAuthHolder) {
-        this.redisTemplate2 = redisTemplate2;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.userRepository = userRepository;
-        this.userAuthHolder = userAuthHolder;
-    }
+    private final RedisService redisService;
 
     private static final String EMAIL_PATTERN =
             "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 
     private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
-    public UserDTO me() {
-        UserEntity userEntity = userAuthHolder.current();
-        return UserDTO.of(Optional.ofNullable(userEntity));
+    public UserResponse me() {
+        return UserResponse.fromUserEntity(userAuthHolder.current());
     }
 
-    public UserDTO updateMe(UpdateUserDTO updateUser) {
+    public UserResponse updateMe(UpdateUserRequest updateUser) {
         UserEntity userEntity = userAuthHolder.current();
-        if (updateUser.getNickname() != null) {
-            userEntity.setNickname(updateUser.getNickname());
-        }
+
+        var toBuilder = userRepository.findByEmail(userEntity.getEmail()).toBuilder();
 
         if (updateUser.getPassword() != null && updateUser.getPastPassword() != null) {
             if (bCryptPasswordEncoder.matches(updateUser.getPastPassword(), userEntity.getPassword())) {
-                userEntity.setPassword(bCryptPasswordEncoder.encode(updateUser.getPassword()));
+                toBuilder.password(bCryptPasswordEncoder.encode(updateUser.getPassword()));
             }
         }
+        UserEntity updatedUser = toBuilder.build();
+        userRepository.save(updatedUser);
 
-        userRepository.save(userEntity);
-
-        return UserDTO.of(Optional.of(userEntity));
+        return UserResponse.fromUserEntity(updatedUser);
     }
 
-    public UserEntity register(UserDTO userDTO) {
-        String email = userDTO.getEmail();
-        String hashedPassword = bCryptPasswordEncoder.encode(userDTO.getPassword());
+    public UserResponse register(RegisterRequest user) {
+        String email = user.getEmail();
+        String hashedPassword = bCryptPasswordEncoder.encode(user.getPassword());
 
         if (!checkEmailVerification(email)) {
             throw new CustomConflictException("you need to use email [xxx@xxx.com]");
@@ -72,15 +62,15 @@ public class UserService {
             throw new CustomConflictException("this email does not verify");
         }
 
-        redisTemplate2.delete(email);
+        redisService.deleteOnRedisForAuthenticEmail(email);
 
-        UserEntity userEntity = new UserEntity();
+        UserEntity userEntity = UserEntity.builder()
+                .email(email)
+                .password(hashedPassword)
+                .role(Role.ROLE_USER)
+                .build();
 
-        userEntity.setEmail(email);
-        userEntity.setPassword(hashedPassword);
-        userEntity.setRole("ROLE_USER");
-
-        return userRepository.save(userEntity);
+        return UserResponse.fromUserEntity(userRepository.save(userEntity));
     }
 
     public UserEntity getUserByEmail(String email) {
@@ -88,7 +78,7 @@ public class UserService {
     }
 
     private Boolean checkVerification(String email) {
-        return redisTemplate2.hasKey(email);
+        return redisService.findOnRedisForAuthenticEmail(email);
     }
 
     private Boolean checkEmailVerification(String email) {

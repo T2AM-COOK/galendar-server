@@ -21,9 +21,9 @@ public class JoinService {
         String userName = joinDto.getUserName();
         String passWord = joinDto.getPassWord();
 
-        Boolean isExist = userRepository.existsByUserName(userName);
+        Boolean isExist = userRepository.existsByEmail(userName);
 
-        if (userRepository.existsByUserName(userName)) {
+        if (userRepository.existsByEmail(userName)) {
             throw new IllegalArgumentException("이미 사용 중인 사용자 이름입니다.");
         }
 

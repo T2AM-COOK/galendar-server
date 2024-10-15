@@ -1,25 +1,27 @@
 package com.k.garlander.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.k.garlander.entity.enums.Role;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@Entity
-@Getter
-@Setter
+@Getter @SuperBuilder(toBuilder = true)
+@Entity(name = "user")
+@NoArgsConstructor
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userName;
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @JsonIgnore
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @JsonIgnore
     private String password;
-
-    private String role;
 }

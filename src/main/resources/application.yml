@@ -39,7 +39,7 @@ spring:
 
   jwt:
     access:
-        expiration: ${ACCESS_END}  # 아직 공백
+        expiration: ${ACCESS_END}
     refresh:
         expiration: ${REFRESH_END}
     secret: ${JWT_KEY}
