@@ -9,6 +9,7 @@ import com.galendar.global.common.dto.response.ResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthController {
 
     private final AuthService authService;
@@ -35,6 +37,7 @@ public class AuthController {
     @Operation(summary = "회원 인증", description = "회원 인증")
     @PostMapping
     public ResponseEntity<ResponseData> auth(@Validated @RequestBody AuthenticationRequest request) {
+        log.info(request.getEmail());
         ResponseData<JsonWebTokenResponse> responseData = ResponseData.ok(authService.auth(request), "로그인 성공");
         return ResponseEntity.ok(responseData);
     }
