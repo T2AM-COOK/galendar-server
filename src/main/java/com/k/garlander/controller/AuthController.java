@@ -1,6 +1,7 @@
 package com.k.garlander.controller;
 
 import com.k.garlander.dto.UserDTO;
+import com.k.garlander.dto.req.LoginRequest;
 import com.k.garlander.dto.req.RegisterRequest;
 import com.k.garlander.service.*;
 import io.swagger.annotations.ApiImplicitParam;
@@ -80,7 +81,7 @@ public class AuthController {
 
     @Operation(
             summary = "access 토큰 만료시 다시 발급받는 주소입니다.",
-            description = "베리어를 포함해서 주세요"
+            description = "Refresh 헤더에 값을 넣어주세요."
     )
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Refresh", value = "JWT access token", required = true, dataType = "string", paramType = "header")
