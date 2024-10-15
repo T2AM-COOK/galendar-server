@@ -38,10 +38,10 @@ public class AuthController {
 
     @Operation(
             summary = "로그인하는 주소입니다.",
-            description = "access token 은 bearer 를 포함합니다."
+            description = "access token 을 포함합니다. bearer 을 사용하세요."
     )
     @PostMapping("/login")
-    public void login(@RequestBody UserDTO user) {
+    public void login(@RequestBody LoginRequest user) {
         throw new IllegalStateException("This method is handled by a filter.");
     }
 
