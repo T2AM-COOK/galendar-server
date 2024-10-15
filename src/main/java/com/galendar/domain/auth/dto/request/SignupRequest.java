@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SignupRequest {
-    @Email
+//    @Email
     @NotBlank(message = "이메일을 입력해 주세요.")
     private String email;
 
