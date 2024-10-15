@@ -1,8 +1,5 @@
 package com.galendar.global.config;
 
-import com.galendar.global.jwt.JwtFilter;
-import com.galendar.global.jwt.JwtUtil;
-import com.galendar.global.jwt.LoginFilter;
 import com.galendar.global.jwt.filter.JwtAuthenticationFilter;
 import com.galendar.global.jwt.filter.JwtExceptionFilter;
 import com.galendar.global.security.CustomUserDetailsService;
@@ -67,7 +64,7 @@ public class SecurityConfig {
                                 configuration.setAllowCredentials(true);
                                 configuration.setAllowedHeaders(Collections.singletonList("*"));
                                 configuration.setMaxAge(3600L);
-                                configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+//                                configuration.setExposedHeaders(Collections.singletonList("Authorization"));
                                 return configuration;
                             }
                         }));
