@@ -3,7 +3,6 @@ package com.k.garlander.security.jwt.details;
 import com.k.garlander.entity.UserEntity;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import com.k.garlander.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -31,7 +30,7 @@ public class CustomUserDetails implements UserDetails {
             @Override
             public String getAuthority() {
 
-                return userEntity.getRole();
+                return userEntity.getRole().value();
             }
         });
 
@@ -49,7 +48,7 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getUsername() {
 
-        return userEntity.getUserName();
+        return userEntity.getEmail();
     }
 
     @Override
