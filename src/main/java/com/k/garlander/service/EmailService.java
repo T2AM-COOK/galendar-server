@@ -19,7 +19,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
             helper.setTo(to);
             helper.setSubject("Galendar 인증코드");
-            helper.setText(htmlBody, true); // true to enable HTML
+            helper.setText(htmlBody, true);
 
             javaMailSender.send(message);
         } catch (MessagingException e) {
