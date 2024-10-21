@@ -1,6 +1,5 @@
 package com.k.garlander.service;
 
-import com.k.garlander.dto.JoinDTO;
 import com.k.garlander.entity.UserEntity;
 import com.k.garlander.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
