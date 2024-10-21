@@ -3,7 +3,7 @@ package com.k.garlander.security.jwt;
 import com.k.garlander.entity.enums.Role;
 import com.k.garlander.exception.JwtSignatureException;
 import io.jsonwebtoken.Jwts;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -16,7 +16,7 @@ public class JwtUtil {
 
     private SecretKey secretKey;
 
-    public JwtUtil(@Value("${JWT_KEY}")String secret) {
+    public JwtUtil(@Value("${spring.jwt.secret}")String secret) {
         this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
     }
 
@@ -25,11 +25,11 @@ public class JwtUtil {
     }
 
     public String getRole(String token) {
-        return Jwts.parser().verifyWith(secretKey).build().parseClaimsJws(token).getPayload().get("role", String.class);
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("role", String.class);
     }
 
     public String getDevice(String token) {
-        return Jwts.parser().verifyWith(secretKey).build().parseClaimsJws(token).getPayload().get("device", String.class);
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("device", String.class);
     }
 
     public String getCategory(String token) {
@@ -56,5 +56,6 @@ public class JwtUtil {
         } catch (Exception e) {
             throw new RuntimeException("JWT processing error");
         }
+
     }
 }

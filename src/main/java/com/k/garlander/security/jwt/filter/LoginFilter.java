@@ -55,7 +55,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password, null);
             return authenticationManager.authenticate(authToken);
-        } catch (IOException e) {
+        } catch(IOException e) {
 
             throw new RuntimeException("Json passing error");
         }

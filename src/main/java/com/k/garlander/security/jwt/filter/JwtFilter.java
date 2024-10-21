@@ -14,13 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
 @Slf4j
 @RequiredArgsConstructor
-public class JwtFilter {
+public class JwtFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
 
     @Override
@@ -34,7 +35,9 @@ public class JwtFilter {
         }
 
         if (accessToken == null) {
+
             filterChain.doFilter(req, res);
+
             return;
         }
 
@@ -73,6 +76,5 @@ public class JwtFilter {
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
         filterChain.doFilter(req, res);
-    }
     }
 }

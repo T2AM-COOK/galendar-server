@@ -19,5 +19,4 @@ public class JwtProperties {
     public static class Expiration {
         private long expiration;
     }
-
 }
