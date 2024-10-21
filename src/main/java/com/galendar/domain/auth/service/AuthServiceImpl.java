@@ -8,7 +8,6 @@ import com.galendar.domain.user.dto.User;
 import com.galendar.domain.user.entity.UserEntity;
 import com.galendar.domain.user.entity.enums.UserRole;
 import com.galendar.domain.user.repository.UserRepository;
-import com.galendar.global.common.dto.response.ResponseData;
 import com.galendar.global.jwt.JwtUtil;
 import com.galendar.global.jwt.enums.JwtType;
 import com.galendar.global.jwt.exception.TokenTypeException;

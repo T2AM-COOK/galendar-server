@@ -25,5 +25,4 @@ public abstract class BaseTimeEntity {
 
     @LastModifiedDate
     protected LocalDateTime modifiedDateTime;
-
 }
