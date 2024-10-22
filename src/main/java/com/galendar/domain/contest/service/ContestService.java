@@ -2,7 +2,7 @@ package com.galendar.domain.contest.service;
 
 import com.galendar.domain.contest.dto.ContestDto;
 import com.galendar.domain.contest.entity.ContestEntity;
-import com.galendar.domain.contest.enums.ContestCost;
+import com.galendar.domain.contest.entity.enums.ContestCost;
 import com.galendar.domain.contest.repository.ContestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

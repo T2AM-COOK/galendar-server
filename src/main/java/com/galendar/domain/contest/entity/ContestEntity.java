@@ -1,6 +1,6 @@
 package com.galendar.domain.contest.entity;
 
-import com.galendar.domain.contest.enums.ContestCost;
+import com.galendar.domain.contest.entity.enums.ContestCost;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

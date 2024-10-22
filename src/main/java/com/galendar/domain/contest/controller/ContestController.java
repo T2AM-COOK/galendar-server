@@ -3,6 +3,7 @@ package com.galendar.domain.contest.controller;
 import com.galendar.domain.contest.dto.ContestDto;
 import com.galendar.domain.contest.res.BaseResponse;
 import com.galendar.domain.contest.service.ContestService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "대회 등록")
 @RestController
 @RequestMapping("/api/contest")
 @RequiredArgsConstructor

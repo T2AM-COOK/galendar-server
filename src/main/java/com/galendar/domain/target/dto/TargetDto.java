@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class TargetDto {
     private Long id; //대상 id
-    private String name; //대상 이름
+    private String Role; //대상 이름
     private Integer del; //삭제
 }
