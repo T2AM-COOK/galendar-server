@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BookmarkRequest {
     private Long userId;
-    private Long postId;
+    private Long contestId;
 }
