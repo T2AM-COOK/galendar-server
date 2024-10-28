@@ -72,9 +72,7 @@ public class SecurityConfig {
                         }));
 
         http
-                .csrf((auth) -> auth.disable())
-                .formLogin((auth) -> auth.disable())
-                .httpBasic((auth) -> auth.disable());
+                .csrf((auth) -> auth.disable());
 
         http
                 .authorizeHttpRequests((auth) -> auth
@@ -83,7 +81,6 @@ public class SecurityConfig {
                         // 로그인, 홈, 회원가입 경로 허용
                         .requestMatchers("/auth/**").permitAll()
                         // ADMIN 권한 필요
-                        .requestMatchers("admin").hasRole("ADMIN")
                         // 나머지 모든 요청 인증 필요
                         .anyRequest().authenticated());
 

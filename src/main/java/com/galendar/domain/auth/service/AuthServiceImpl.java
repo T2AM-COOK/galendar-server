@@ -50,9 +50,7 @@ public class AuthServiceImpl implements AuthService {
                         request.getPassword()
                 )
         );
-
         User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
-        log.info(user.getEmail());
         return JsonWebTokenResponse.builder()
                 .accessToken(
                         jwtUtil.generateAccessToken(user.getEmail())
