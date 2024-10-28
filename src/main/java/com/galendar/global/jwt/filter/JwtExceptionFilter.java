@@ -25,6 +25,7 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
     }
 
     private void setResonse(HttpServletResponse response, String message) throws IOException {
+        response.setCharacterEncoding("UTF-8");
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         String jsonResponse = new ObjectMapper().writeValueAsString(new ErrorResponse(HttpServletResponse.SC_UNAUTHORIZED, message));
