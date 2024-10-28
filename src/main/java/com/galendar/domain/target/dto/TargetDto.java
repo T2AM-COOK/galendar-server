@@ -1,12 +1,19 @@
 package com.galendar.domain.target.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class TargetDto {
-    private Long id; //대상 id
-    private String Role; //대상 이름
-    private Integer del; //삭제
+@EqualsAndHashCode
+public class TargetDTO {
+    private Long id;
+    private String name;
 }
