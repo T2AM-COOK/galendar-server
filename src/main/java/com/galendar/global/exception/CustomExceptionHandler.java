@@ -5,14 +5,12 @@ import io.jsonwebtoken.JwtException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestControllerAdvice
 public class CustomExceptionHandler {
@@ -28,8 +26,8 @@ public class CustomExceptionHandler {
         return response;
     }
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ErrorResponse> handleBadCredentialsException(BadCredentialsException e) {
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ErrorResponse> handleBadCredentialsException(AuthenticationException e) {
         ResponseEntity<ErrorResponse> response = ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
                 .body(
@@ -49,7 +47,10 @@ public class CustomExceptionHandler {
     }
 
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler({
+            MethodArgumentNotValidException.class,
+            InternalAuthenticationServiceException.class
+    })
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
 
         String message = e.getBindingResult().getFieldErrors().stream()
@@ -67,7 +68,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity handlerException(Exception e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( new ErrorResponse(HttpServletResponse.SC_BAD_REQUEST, e.getMessage()));
     }
 
 }
