@@ -4,6 +4,9 @@ import com.galendar.domain.auth.dto.request.AuthenticationRequest;
 import com.galendar.domain.auth.dto.request.RefreshTokenRequest;
 import com.galendar.domain.auth.dto.request.SignupRequest;
 import com.galendar.domain.auth.dto.response.JsonWebTokenResponse;
+import com.galendar.domain.email.entity.EmailEntity;
+import com.galendar.domain.email.exception.EmailNotVerifiedException;
+import com.galendar.domain.email.repository.EmailRepository;
 import com.galendar.domain.user.dto.User;
 import com.galendar.domain.user.entity.UserEntity;
 import com.galendar.domain.user.entity.enums.UserRole;
@@ -30,9 +33,14 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final EmailRepository emailRepository;
 
     @Override
     public void signup(SignupRequest request) {
+        EmailEntity verification = emailRepository.findByEmail(request.getEmail()).orElse(null);
+        if (verification == null || !verification.isVerified()) {
+            throw EmailNotVerifiedException.EXCEPTION;
+        }
         UserEntity userEntity = UserEntity.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))

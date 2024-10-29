@@ -16,7 +16,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "tb_user") // 이 클래스가 'tb_user'라는 데이터베이스 테이블과 매핑됨을 나타냄
+@Entity(name = "tbl_user") // 이 클래스가 'tb_user'라는 데이터베이스 테이블과 매핑됨을 나타냄
 @Builder // 빌더 패턴을 사용하여 객체를 생성할 수 있게 해줌
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자를 생성하며, PROTECTED 접근 수준을 설정해 외부에서 직접 호출을 제한함
 @AllArgsConstructor // 모든 필드를 인자로 받는 생성자를 자동으로 생성함

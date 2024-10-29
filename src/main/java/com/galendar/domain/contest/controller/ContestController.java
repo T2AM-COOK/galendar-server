@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "대회 등록")
+@Tag(name = "대회 등록", description = "대회 등록 api입니다.")
 @RestController
 @RequestMapping("/api/contest")
 @RequiredArgsConstructor

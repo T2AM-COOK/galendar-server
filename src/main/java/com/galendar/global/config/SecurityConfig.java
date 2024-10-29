@@ -1,5 +1,6 @@
 package com.galendar.global.config;
 
+import com.galendar.global.jwt.JwtUtil;
 import com.galendar.global.jwt.filter.JwtAuthenticationFilter;
 import com.galendar.global.jwt.filter.JwtExceptionFilter;
 import com.galendar.global.security.CustomUserDetailsService;
@@ -33,6 +34,7 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomUserDetailsService customUserDetailsService;
+    private final JwtUtil jwtUtil;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -85,6 +87,8 @@ public class SecurityConfig {
                         // ADMIN 권한 필요
                         .requestMatchers("admin").hasRole("ADMIN")
                         // 나머지 모든 요청 인증 필요
+                        .requestMatchers("/email/send").permitAll()
+                        .requestMatchers("/email/verify").permitAll()
                         .anyRequest().authenticated());
 
         http

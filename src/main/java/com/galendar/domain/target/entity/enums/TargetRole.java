@@ -2,7 +2,7 @@ package com.galendar.domain.target.entity.enums;
 
 public enum TargetRole {
     EVERYONE,
-    ELEMENTRAY,
+    ELEMENTARY,
     MIDDLE,
     HIGH,
     UNIVERSITY,

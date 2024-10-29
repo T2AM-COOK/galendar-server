@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Tag(name = "target", description = "대회 대상 관련 API")
+@Tag(name = "target", description = "대회 대상 관련 api입니다.")
 @Controller
 public class TargetController {
 
