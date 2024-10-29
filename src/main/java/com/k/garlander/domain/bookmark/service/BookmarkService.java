@@ -1,5 +1,6 @@
 package com.k.garlander.domain.bookmark.service;
 
+import com.k.garlander.domain.bookmark.dto.res.BookmarkResponse;
 import com.k.garlander.domain.bookmark.entity.BookmarkEntity;
 import com.k.garlander.domain.bookmark.repository.BookmarkRepository;
 import com.k.garlander.domain.user.entity.UserEntity;
@@ -9,6 +10,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -20,41 +23,36 @@ public class BookmarkService {
     private final UserRepository userRepository;
     private final UserAuthHolder userAuthHolder;
 
-    @Transactional
-    public void addBookmark(Long bookmarkRequest) throws Exception {
-
-        UserEntity user = userRepository.findByEmail(userAuthHolder.current().getEmail());
-
-//        ContestRepository contest = contestRepository.findById(bookmarkRepository).orElse(null);
-
-//        if (bookmarkRepository.findByUserAndContest(user, contest).isPresent()) {
-//            throw new Exception("Bookmark already exists");
-//        }
-
+//    @Transactional
+//    public void addBookmark(Long bookmarkRequest) {
+//
+//        UserEntity user = userRepository.findByEmail(userAuthHolder.current().getEmail());
+//
+//        ContestEntity contest = contestRepository.findById(bookmarkRequest).orElse(null);
+//
 //        BookmarkEntity bookmark = BookmarkEntity.builder()
 //                .contest(contest)
 //                .user(user)
-//                .build;
-
+//                .build();
+//
 //        bookmarkRepository.save(bookmark);
-    }
+//    }
 
     @Transactional
-    public void removeBookmark(Long bookmarkRequest) throws Exception {
+    public void removeBookmark(Long bookmarkRequest) {
 
         UserEntity user = userRepository.findByEmail(userAuthHolder.current().getEmail());
-        // null 시 에러 반환 필요
 
-//        ContestEntity contest = contestRepository.findById(bookmarkRequest).orElse(null);
-        // null 시 에러 반환 필요
+//        ContestEntity contest = contestRepository.findById(bookmarkRequest).orElseThrow(RuntimeException::new);
 
-//        Optional<BookmarkEntity> bookmark = bookmarkRepository.findById(user, contest);
-
-//        bookmarkRepository.delete(bookmark.get());
+//        bookmarkRepository.deleteByUserAndContest(user, contest);
     }
 
-    @Transactional
-    public void getBookmark(Long bookmarkRequest) throws Exception {
-        // 북마크 목록 조회 개발
+    public List<BookmarkResponse> getBookmarkedContestByUser() {
+        UserEntity user = userRepository.findByEmail(userAuthHolder.current().getEmail());
+
+//        return Objects.requireNonNull(bookmarkRepository.findByUser(user).orElse(null)).stream()
+//                .map(BookmarkResponse::fromBookmarkEntity)
+//                .toList();
     }
 }
