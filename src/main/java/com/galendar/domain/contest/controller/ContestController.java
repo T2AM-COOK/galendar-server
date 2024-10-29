@@ -32,7 +32,7 @@ public class ContestController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<ResponseData> list(@RequestBody ContestRequest request) {
+    public ResponseEntity<ResponseData> list(ContestRequest request) {
         List<ContestResponse> result = contestQueryService.list(request);
         return ResponseEntity.ok(ResponseData.ok(result, "조회 성공"));
     }

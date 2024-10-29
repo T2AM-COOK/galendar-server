@@ -14,8 +14,8 @@ public class SwaggerConfig {
     public OpenAPI api() {
         return new OpenAPI()
                 .info(
-                        new Info().title("JWT Template API")
-                                .description("JWT Template API Reference for Developers")
+                        new Info().title("Galendar API")
+                                .description("Galendar API Reference for Developers")
                                 .version("1.0.0")
                 )
                 .addSecurityItem(new SecurityRequirement().addList("Authorization"))
