@@ -20,3 +20,10 @@ spring:
     secret: d0dde67a111b6a000b2eeaedbf0756538051784a199e143f4b70043d628f9154
     expiration: 900000  # 15min
     refreshExpiration: 86400000 # 1day
+
+crawling:
+  contest-korea:
+    base-url: https://www.contestkorea.com
+    subject-url: /sub/
+    it-list-url: list.php?int_gbn=1&Txt_bcode=030510001
+    days-to-search: 10

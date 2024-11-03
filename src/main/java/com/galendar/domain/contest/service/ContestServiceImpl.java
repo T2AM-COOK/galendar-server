@@ -14,6 +14,7 @@ import com.galendar.domain.region.entity.RegionEntity;
 import com.galendar.domain.region.mapper.RegionMapper;
 import com.galendar.domain.target.entity.TargetEntity;
 import com.galendar.domain.target.mapper.TargetMapper;
+import com.galendar.domain.user.entity.UserEntity;
 import com.galendar.global.security.UserSecurity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,11 @@ public class ContestServiceImpl implements ContestService {
     private final RegionMapper regionMapper;
 
     public void register(RegisterContestRequest request) {
-        final ContestEntity contestEntity = contestMapper.createEntity(request, userSecurity.getUserEntity());
+        register(request, userSecurity.getUserEntity());
+    }
+
+    public void register(RegisterContestRequest request, UserEntity userEntity) {
+        final ContestEntity contestEntity = contestMapper.createEntity(request, userEntity);
 
         List<TargetEntity> targetEntities = request.getTargets().stream().distinct().map(targetMapper::createEntity).toList();
         List<ContestTargetEntity> contestTargetEntities = targetEntities.stream().map(targetEntity -> ContestTargetMapper.createEntity(contestEntity, targetEntity)).toList();
