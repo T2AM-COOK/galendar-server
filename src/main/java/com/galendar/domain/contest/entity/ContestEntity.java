@@ -4,6 +4,7 @@ import com.galendar.domain.contest.entity.enums.ContestCost;
 import com.galendar.domain.user.entity.UserEntity;
 import com.galendar.global.common.entity.BaseTimeEntity;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -49,10 +50,12 @@ public class ContestEntity extends BaseTimeEntity {
     @OneToMany(mappedBy = "contestEntity", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<ContestRegionEntity> contestRegions = new ArrayList<>();
 
+    private String strNo;
+
     @NotNull
     private String title;
 
-    @NotNull
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
     @Enumerated(EnumType.STRING)

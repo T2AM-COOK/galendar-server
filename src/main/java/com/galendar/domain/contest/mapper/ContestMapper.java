@@ -34,6 +34,7 @@ public class ContestMapper {
                 .submitEndDate(request.getSubmitEndDate())
                 .contestStartDate(request.getContestStartDate())
                 .contestEndDate(request.getContestEndDate())
+                .strNo(request.getStrNo())
                 .build();
     }
 

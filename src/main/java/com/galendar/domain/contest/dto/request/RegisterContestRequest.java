@@ -35,4 +35,5 @@ public class RegisterContestRequest {
     @NotNull(message = "지역 id를 입력해 주세요")
     private List<Long> regions;
 
+    private String strNo;
 }
