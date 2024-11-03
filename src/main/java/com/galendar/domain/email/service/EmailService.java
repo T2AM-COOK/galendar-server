@@ -49,6 +49,7 @@ public class EmailService {
 
             helper.setText(content, true);
 
+            helper.addInline("image", new ClassPathResource("static/galendar.png"));
 
             javaMailSender.send(message);
         } catch (MessagingException | IOException e) {
