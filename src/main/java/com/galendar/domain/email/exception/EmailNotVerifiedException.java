@@ -7,6 +7,6 @@ public class EmailNotVerifiedException extends CustomException {
     public static final CustomException EXCEPTION = new EmailNotVerifiedException();
 
     private EmailNotVerifiedException() {
-        super(400, "회원을 찾을 수 없습니다.");
+        super(400, "인증된 회원을 찾을 수 없습니다.");
     }
 }

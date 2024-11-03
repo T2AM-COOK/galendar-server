@@ -31,16 +31,13 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
+    private final EmailRepository emailRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
-    private final EmailRepository emailRepository;
 
     @Override
     public void signup(SignupRequest request) {
-        EmailEntity verification = emailRepository.findByEmail(request.getEmail()).orElse(null);
-        if (verification == null || !verification.isVerified()) {
-            throw EmailNotVerifiedException.EXCEPTION;
-        }
+        emailRepository.findByEmail(request.getEmail()).orElseThrow(() -> EmailNotVerifiedException.EXCEPTION);
         UserEntity userEntity = UserEntity.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
