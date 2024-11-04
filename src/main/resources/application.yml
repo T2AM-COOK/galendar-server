@@ -26,4 +26,4 @@ crawling:
     base-url: https://www.contestkorea.com
     subject-url: /sub/
     it-list-url: list.php?int_gbn=1&Txt_bcode=030510001
-    days-to-search: 10
+    days-to-search: 3
