@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
+    public UserEntity toEntity(final Long id) {
+        return UserEntity.builder().id(id).build();
+    }
+
     public User toDTO(UserEntity userEntity) {
         return User.builder()
                 .id(userEntity.getId())

@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true
@@ -38,3 +38,9 @@ spring:
           writetimeout: 5000
           ssl:
             trust: smtp.gmail.com
+crawling:
+  contest-korea:
+    base-url: https://www.contestkorea.com
+    subject-url: /sub/
+    it-list-url: list.php?int_gbn=1&Txt_bcode=030510001
+    days-to-search: 3

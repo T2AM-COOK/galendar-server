@@ -32,7 +32,7 @@ public class AuthController {
     }
 
     @Operation(summary = "회원 인증", description = "로그인을 통해 인증을 처리합니다.")
-    @PostMapping("/login")
+    @PostMapping
     public ResponseEntity<ResponseData<JsonWebTokenResponse>> auth(@Validated @RequestBody AuthenticationRequest request) {
         JsonWebTokenResponse tokenResponse = authService.auth(request);
         return ResponseEntity.ok(ResponseData.ok(tokenResponse, "로그인 성공"));

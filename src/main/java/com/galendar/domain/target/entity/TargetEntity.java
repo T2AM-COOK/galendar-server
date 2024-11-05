@@ -1,24 +1,32 @@
 package com.galendar.domain.target.entity;
 
-import com.galendar.domain.contest.entity.enums.ContestCost;
-import com.galendar.domain.target.entity.enums.TargetRole;
-import jakarta.persistence.*;
+import com.galendar.global.common.entity.BaseTimeEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="tbl_target")
+@Table(name="tb_target")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter
-public class TargetEntity {
+public class TargetEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "target_id")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    // EnumType.STRING으로 선언하여 enum 값을 문자열로 데이터베이스에 저장
-    private TargetRole Role;
+    @NotNull
+    private String name;
 
-    private Integer del;
+    private int del;
 }
