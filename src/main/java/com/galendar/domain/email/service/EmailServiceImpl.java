@@ -45,6 +45,9 @@ public class EmailServiceImpl implements EmailService {
             content = content.replace("{code}", code);
 
             helper.setText(content, true);
+
+            helper.addInline("image", new ClassPathResource("static/galendar.png"));
+
             javaMailSender.send(message);
         } catch (MessagingException | IOException e) {
             throw new CustomException(400, String.format("%s에게 인증 이메일 전송 실패: %s", email, e.getMessage()));

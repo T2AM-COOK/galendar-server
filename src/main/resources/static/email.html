@@ -5,25 +5,133 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이메일 인증</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Noto Sans KR', Arial, sans-serif;
+      background-color: #f8fafc;
+      color: #334155;
       text-align: center;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
     }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 30px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(148, 163, 184, 0.1);
+    }
+
+    .logo img {
+      width: 100px;
+      margin: 10px auto 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .greeting {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2563eb;
+      margin: 25px 0 15px;
+    }
+
+    .thanks {
+      font-size: 18px;
+      color: #475569;
+      margin-bottom: 30px;
+    }
+
+    .code-container {
+      background-color: #f1f5f9;
+      padding: 25px;
+      border-radius: 12px;
+      margin: 30px 0;
+      border: 1px solid #e2e8f0;
+    }
+
     .code {
-      font-size: 48px;
-      margin: 20px 0;
-      letter-spacing: 10px;
+      font-size: 42px;
+      font-weight: 700;
+      color: #1e40af;
+      letter-spacing: 8px;
+      margin: 10px 0;
+    }
+
+    .expiry-info {
+      font-size: 15px;
+      color: #64748b;
+      margin: 15px 0;
+      padding: 10px 20px;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      display: inline-block;
+      border: 1px solid #e2e8f0;
+    }
+
+    .warning {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.6;
+      margin: 25px 0;
+      padding: 15px;
+      background-color: #f8fafc;
+      border-radius: 8px;
+    }
+
+    .footer {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-top: 35px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .emoji {
+      font-size: 22px;
+      margin: 0 3px;
+    }
+
+    .title {
+      font-size: 16px;
+      color: #64748b;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-<img src="cid:image" style="width: 150px;" alt="갈랜더 인증코드 이미지"><br><br>
-<p style="font-size: 16px; font-weight: bold;">갈랜더 이메일 인증을 위해 아래 코드를 입력하세요</p>
-<h1 class="code">{code}</h1>
-<p style="font-size: 14px;">코드는 5분 후 만료됩니다.</p>
-<p style="font-size: 10px; line-height: 1.6; margin: 20px 0;">만약 이 요청을 본인이 하지 않았다면, 이 메일을 무시하셔도 됩니다.</p>
-<div style="text-align: center; margin-top: 30px; font-size: 12px; color: #999;">
-  © 2024 galendar. All rights reserved.
+<div class="container">
+  <div class="logo">
+    <img src="cid:image" alt="갈랜더 로고">
+  </div>
+  <p class="greeting">
+    <span class="emoji">✨</span> 갈랜더에 오신 것을 환영합니다 <span class="emoji">✨</span>
+  </p>
+  <p class="thanks">
+    갈랜더와 함께 특별한 여정을 시작해보세요🚀
+  </p>
+  <div class="code-container">
+    <p class="title">인증 코드를 입력해주세요</p>
+    <h1 class="code">{code}</h1>
+  </div>
+  <p class="expiry-info">
+    <span class="emoji">⏰</span> 인증 코드는 5분 후에 만료됩니다
+  </p>
+  <p class="warning">
+    💡본인이 요청하지 않은 메일이라면 무시하셔도 됩니다
+  </p>
+  <div class="footer">
+    💌 © 2024 Galendar. All rights reserved.
+  </div>
 </div>
 </body>
 </html>
