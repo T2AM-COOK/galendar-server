@@ -19,6 +19,33 @@ cache:
 
 script: "./gradlew clean build"
 
+before_deploy:
+  - zip -r galendar-server *
+  - mkdir -p deploy
+  - mv galendar-server.zip deploy/galendar-server.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: lift-s3-bucket
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: lift-s3-bucket
+    key: galendar-server.zip
+    bundle_type: zip
+    application: galendar-server
+    deployment_group: galendar-server-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+
+
 notifications:
   email:
     recipients:
