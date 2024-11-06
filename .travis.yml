@@ -46,7 +46,8 @@ deploy:
     deployment_group: galendar-server-group
     region: ap-northeast-2
     wait-until-deployed: true
-
+    on:
+      branch: main
 
 notifications:
   email:
