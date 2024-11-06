@@ -28,7 +28,7 @@ deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: lift-s3-bucket
+    bucket: galendar-server-build
     region: ap-northeast-2
     skip_cleanup: true
     acl: private
@@ -39,7 +39,7 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: lift-s3-bucket
+    bucket: galendar-server-build
     key: galendar-server.zip
     bundle_type: zip
     application: galendar-server
