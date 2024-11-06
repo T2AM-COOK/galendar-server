@@ -7,6 +7,11 @@ branches:
   only:
     - main
 
+env:
+  global:
+    - EMAIL_USERNAME: $EMAIL_USERNAME
+    - EMAIL_PASSWORD: $EMAIL_PASSWORD
+
 cache:
   directories:
     - '$HOME/.m2/repository'
