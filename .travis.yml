@@ -33,7 +33,6 @@ deploy:
     skip_cleanup: true
     acl: private
     local_dir: deploy
-    wait-until-deployed: true
     on:
       all_branches: true
   - provider: codedeploy
@@ -45,7 +44,6 @@ deploy:
     application: galendar-server
     deployment_group: galendar-server-group
     region: ap-northeast-2
-    wait-until-deployed: true
     on:
       all_branches: true
 
