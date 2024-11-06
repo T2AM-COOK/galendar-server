@@ -14,5 +14,4 @@ public interface ContestCrawler {
     String extractViewContent(Document document);
     String extractViewImageUrl(Document document);
     ContestDetailCrawlerDTO parseContestDetails(Document document);
-
 }
