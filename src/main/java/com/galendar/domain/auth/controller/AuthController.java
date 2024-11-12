@@ -31,7 +31,7 @@ public class AuthController {
         return ResponseEntity.ok(ResponseData.ok("가입이 완료되었습니다!"));
     }
 
-    @Operation(summary = "회원 인증", description = "로그인을 통해 인증을 처리합니다.")
+    @Operation(summary = "로그인", description = "로그인을 통해 인증을 처리합니다.")
     @PostMapping
     public ResponseEntity<ResponseData<JsonWebTokenResponse>> auth(@Validated @RequestBody AuthenticationRequest request) {
         JsonWebTokenResponse tokenResponse = authService.auth(request);

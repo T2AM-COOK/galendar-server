@@ -12,6 +12,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +40,9 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
                 .where(
                         containKeyword(request.getKeyword()),
                         eqTargets(request.getTargets()),
-                        eqRegions(request.getRegions())
+                        eqRegions(request.getRegions()),
+                        afterSubmitStartDate(request.getSubmitStartDate()),
+                        beforeSubmitEndDate(request.getSubmitEndDate())
                 )
                 .offset((request.getPage() - 1) * request.getSize())
                 .limit(request.getSize())
@@ -93,6 +96,16 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
     private BooleanExpression eqId(Long id) {
         if (id == null) return null;
         return contestEntity.id.eq(id);
+    }
+
+    private BooleanExpression beforeSubmitEndDate(LocalDate submitEndDate) {
+        if (submitEndDate == null) return null;
+        return contestEntity.submitEndDate.before(submitEndDate);
+    }
+
+    private BooleanExpression afterSubmitStartDate(LocalDate submitStartDate) {
+        if (submitStartDate == null) return null;
+        return contestEntity.submitStartDate.after(submitStartDate);
     }
 
     private BooleanExpression eqRegions(List<Long> regions) {

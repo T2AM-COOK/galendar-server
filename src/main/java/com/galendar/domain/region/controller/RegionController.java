@@ -25,6 +25,7 @@ import java.util.List;
 public class RegionController {
 
     private final RegionService regionService;
+
     @Operation(summary = "대회 지역 등록", description = "")
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
@@ -38,6 +39,13 @@ public class RegionController {
         List<RegionDTO> result = regionService.list();
         return ResponseEntity.ok(ResponseData.ok(result, "조회 성공"));
     }
+//
+//    @Operation(summary = "대회 지역 검색")
+//    @PostMapping("/search")
+//    public ResponseEntity<ResponseData<List<RegionDTO>>> search(@Validated @RequestBody SearchRegionRequest request) {
+//        List<RegionDTO> result = regionService.search(request.getName());
+//        return ResponseEntity.ok(ResponseData.ok(result, "조회 성공"));
+//    }
 
 
 }
