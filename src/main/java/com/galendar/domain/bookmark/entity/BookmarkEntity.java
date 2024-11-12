@@ -2,6 +2,7 @@ package com.galendar.domain.bookmark.entity;
 
 import com.galendar.domain.contest.entity.ContestEntity;
 import com.galendar.domain.user.entity.UserEntity;
+import com.galendar.global.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ import java.time.LocalDate;
 @Table(name = "bookmark", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"user_id", "contest_id"})
 })
-public class BookmarkEntity {
+public class BookmarkEntity extends BaseTimeEntity {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -28,7 +29,7 @@ public class BookmarkEntity {
 
     @Id
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "contest_id", nullable = false)
     private ContestEntity contest;
 
     @CreatedDate
