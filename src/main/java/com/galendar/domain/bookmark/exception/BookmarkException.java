@@ -1,7 +1,13 @@
 package com.galendar.domain.bookmark.exception;
 
-public class BookmarkException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+
+public class BookmarkException extends StatusException {
     public BookmarkException(String message) {
-        super(message);
+        super(HttpStatus.NOT_FOUND, message);
+    }
+
+    public BookmarkException(HttpStatus httpStatus, String message) {
+        super(httpStatus, message);
     }
 }
