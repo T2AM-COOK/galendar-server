@@ -1,5 +1,6 @@
 package com.galendar.domain.bookmark.exception;
 
+import com.galendar.global.exception.StatusException;
 import org.springframework.http.HttpStatus;
 
 public class BookmarkException extends StatusException {
