@@ -1,0 +1,46 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/galendar
+    username: galendar
+    password: Galander123!@#
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+  jwt:
+    secret: d0dde67a111b6a000b2eeaedbf0756538051784a199e143f4b70043d628f9154
+    expiration: 900000  # 15min
+    refreshExpiration: 86400000 # 1day
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          ssl:
+            trust: smtp.gmail.com
+crawling:
+  contest-korea:
+    base-url: https://www.contestkorea.com
+    subject-url: /sub/
+    it-list-url: list.php?int_gbn=1&Txt_bcode=030510001
+    days-to-search: 3

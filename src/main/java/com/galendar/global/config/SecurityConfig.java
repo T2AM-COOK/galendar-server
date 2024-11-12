@@ -82,6 +82,7 @@ public class SecurityConfig {
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         // 로그인, 홈, 회원가입 경로 허용
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/profile").permitAll()
                         // ADMIN 권한 필요
                         // 나머지 모든 요청 인증 필요
                         .requestMatchers("/email/send").permitAll()
