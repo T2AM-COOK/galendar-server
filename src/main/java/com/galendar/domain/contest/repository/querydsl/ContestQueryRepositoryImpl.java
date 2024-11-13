@@ -100,12 +100,12 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
 
     private BooleanExpression beforeSubmitEndDate(LocalDate submitEndDate) {
         if (submitEndDate == null) return null;
-        return contestEntity.submitEndDate.before(submitEndDate);
+        return contestEntity.submitEndDate.loe(submitEndDate);
     }
 
     private BooleanExpression afterSubmitStartDate(LocalDate submitStartDate) {
         if (submitStartDate == null) return null;
-        return contestEntity.submitStartDate.after(submitStartDate);
+        return contestEntity.submitStartDate.goe(submitStartDate);
     }
 
     private BooleanExpression eqRegions(List<Long> regions) {

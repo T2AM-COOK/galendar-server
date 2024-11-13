@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Tag(name = "region", description = "대회 지역 관련 API (관리자)")
+@Tag(name = "대회 지역", description = "대회 지역 관련 API (관리자)")
 @RestController
 @RequestMapping("/region")
 @RequiredArgsConstructor
