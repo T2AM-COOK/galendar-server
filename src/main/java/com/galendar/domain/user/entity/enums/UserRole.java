@@ -13,4 +13,8 @@ public enum UserRole {
     UserRole(String key) {
         this.key = key;
     }
+
+    public String value() {
+        return this.key;
+    }
 }

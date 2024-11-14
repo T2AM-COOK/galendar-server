@@ -1,27 +1,26 @@
 package com.galendar.global.security;
 
-import com.galendar.domain.user.dto.User;
 import com.galendar.domain.user.entity.UserEntity;
-import com.galendar.domain.user.mapper.UserMapper;
+import com.galendar.domain.user.exception.UserNotFoundException;
+import com.galendar.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-@Component
-public class UserSecurity {
 
-    public User getUser() {
-        return ((CustomUserDetails) SecurityContextHolder
+@Component
+@RequiredArgsConstructor
+public class UserSecurity {
+    private final UserRepository userRepository;
+
+    public CustomUserDetails getUser() {
+        return (CustomUserDetails) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
-                .getPrincipal())
-                .getUser();
+                .getPrincipal();
     }
 
     public UserEntity getUserEntity() {
-        return UserEntity.builder()
-                .id(getUser().getId())
-                .build();
+        return userRepository.findByEmail(getUser().getUsername()).orElseThrow(UserNotFoundException::new);
     }
-
 }
