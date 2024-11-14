@@ -21,7 +21,7 @@ import java.time.LocalDate;
 @Table(name = "bookmark", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"user_id", "contest_id"})
 })
-public class BookmarkEntity extends BaseTimeEntity {
+public class BookmarkEntity {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

@@ -4,14 +4,12 @@ import com.galendar.domain.bookmark.entity.BookmarkEntity;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Builder
 public class BookmarkResponse {
     private Long user;
 
-    private Long contest;
+    private Long contestId;
 
     private String contestName;
 
@@ -19,7 +17,7 @@ public class BookmarkResponse {
     public static BookmarkResponse fromBookmarkEntity(BookmarkEntity bookmarkEntity) {
         return BookmarkResponse.builder()
                 .user(bookmarkEntity.getContest().getUser().getId())
-                .contest(bookmarkEntity.getContest().getId())
+                .contestId(bookmarkEntity.getContest().getId())
                 .contestName(bookmarkEntity.getContest().getTitle())
                 .build();
     }

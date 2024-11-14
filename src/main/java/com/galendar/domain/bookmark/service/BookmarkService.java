@@ -10,7 +10,6 @@ import com.galendar.domain.user.entity.UserEntity;
 import com.galendar.domain.user.repository.UserAuthHolder;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,29 +23,25 @@ public class BookmarkService {
     private final UserAuthHolder userAuthHolder;
 
     @Transactional
-    public void addBookmark(Long bookmarkRequest) {
+    public void addOrDeleteBookmark(Long bookmarkRequest) {
         UserEntity user = userAuthHolder.current();
-        ContestEntity contest = contestRepository.findById(bookmarkRequest).orElseThrow(() -> new BookmarkException("존재하지 않는 북마크"));
-
-        bookmarkRepository.save(BookmarkEntity.builder().contest(contest).user(user).build());
-    }
-
-    @Transactional
-    public void removeBookmark(Long bookmarkRequest) {
-        UserEntity user = userAuthHolder.current();
-        ContestEntity contest = contestRepository.findById(bookmarkRequest).orElseThrow(() -> new BookmarkException("존재하지 않는 북마크"));
+        ContestEntity contest = contestRepository.findById(bookmarkRequest).orElseThrow(() -> new BookmarkException("존재하지 않는 대회"));
         Boolean bookmarkExists = bookmarkRepository.existsByUserAndContest(user, contest);
 
         if (!bookmarkExists) {
-            throw new BookmarkException(HttpStatus.BAD_REQUEST, "삭제할 수 없습니다.");
+            bookmarkRepository.save(BookmarkEntity.builder()
+                    .contest(contest)
+                    .user(user)
+                    .build());
+        } else {
+            bookmarkRepository.deleteByUserAndContest(user, contest);
         }
-        bookmarkRepository.deleteByUserAndContest(user, contest);
+
+        bookmarkRepository.save(BookmarkEntity.builder().contest(contest).user(userAuthHolder.current()).build());
     }
 
     public List<BookmarkResponse> getBookmarkedContestsByUser() {
-        UserEntity user = userAuthHolder.current();
-
-        return bookmarkRepository.findByUserOrderByCreatedAtDesc(user).orElseThrow(() -> new BookmarkException("존재하지 않는 북마크)")).stream()
+        return bookmarkRepository.findByUserOrderByCreatedAtDesc(userAuthHolder.current()).orElseThrow(() -> new BookmarkException("존재하지 않는 북마크)")).stream()
                 .map(BookmarkResponse::fromBookmarkEntity)
                 .toList();
     }
