@@ -41,7 +41,7 @@ public class ContestEntity extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private UserEntity userEntity;
 
 
     @OneToMany(mappedBy = "contestEntity", orphanRemoval = true, cascade = CascadeType.ALL)
