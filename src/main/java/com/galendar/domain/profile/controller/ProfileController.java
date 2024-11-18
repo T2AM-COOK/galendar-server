@@ -1,5 +1,6 @@
 package com.galendar.domain.profile.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+@Hidden
 @RestController
 @RequiredArgsConstructor
 public class ProfileController {

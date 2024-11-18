@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tb_bookmark", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"user_id", "contest_id"})
+    @UniqueConstraint(columnNames = {"user_id", "contest_id"})
 })
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

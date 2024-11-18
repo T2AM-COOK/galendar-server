@@ -27,7 +27,7 @@ public class BookmarkController {
     private final BookmarkService bookmarkService;
     private final BookmarkQueryService bookmarkQueryService;
 
-    @Operation(summary = "북마크 등록", description = "북마크를 등록합니다.")
+    @Operation(summary = "북마크 등록", description = "대회의 아이디를 경로로 전달합니다.")
     @PostMapping("/{contestId}")
     public ResponseEntity register(@PathVariable("contestId") Long contesetId) {
         bookmarkService.register(contesetId);

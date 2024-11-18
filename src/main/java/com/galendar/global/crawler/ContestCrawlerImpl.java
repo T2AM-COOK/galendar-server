@@ -132,16 +132,15 @@ public class ContestCrawlerImpl implements ContestCrawler {
     private String parseContestLocation(String location) {
         return location.replace(" ", "");
     }
-//
-//    private String parseCost(String cost) {
-//        return cost.equals("무료 접수") ? ContestCost.FREE : ContestCost.PAID;
-//    }
 
     private void setDateRange(String dateRange, Consumer<LocalDate> startSetter, Consumer<LocalDate> endSetter) {
         List<LocalDate> dates = Arrays.stream(dateRange.split("~"))
                 .map(date -> LocalDate.parse(date.trim(), DATE_RANGE_FORMATTER))
                 .toList();
-        if (dates.size() >= 2) {
+        if(dates.size() == 1) {
+            startSetter.accept(dates.get(0));
+            endSetter.accept(dates.get(0));
+        }else if (dates.size() >= 2) {
             startSetter.accept(dates.get(0));
             endSetter.accept(dates.get(1));
         }

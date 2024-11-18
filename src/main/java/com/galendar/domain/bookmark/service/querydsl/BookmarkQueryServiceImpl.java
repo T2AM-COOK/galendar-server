@@ -19,8 +19,7 @@ public class BookmarkQueryServiceImpl implements BookmarkQueryService {
     private final UserSecurity userSecurity;
 
     public List<BookmarkResponse> list(BookmarkRequest request) {
-        return bookmarkQueryRepository
-                .findByUserId(request, userSecurity.getUser().getId());
+        return bookmarkQueryRepository.findByUserId(request, userSecurity.getUser().getId());
     }
 
 }

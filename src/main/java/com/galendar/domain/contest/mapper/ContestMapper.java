@@ -7,13 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class ContestMapper {
-    public ContestEntity createEntity(Long contestId) {
-        return ContestEntity.builder().id(contestId).build();
+
+    public ContestEntity createEntity(Long id){
+        return ContestEntity.builder().id(id).build();
     }
 
-    public ContestEntity createEntity(RegisterContestRequest request, UserEntity userEntity) {
+    public ContestEntity createEntity(RegisterContestRequest request, UserEntity userEntity){
         return ContestEntity.builder()
                 .userEntity(
                         userEntity
