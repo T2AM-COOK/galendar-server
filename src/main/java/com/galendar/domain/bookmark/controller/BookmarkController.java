@@ -22,16 +22,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/bookmark")
 @RequiredArgsConstructor
-@Tag(name = "북마크", description = "북마크 api 입니다.")
+@Tag(name = "북마크", description = "북마크 관련 API")
 public class BookmarkController {
-
     private final BookmarkService bookmarkService;
     private final BookmarkQueryService bookmarkQueryService;
 
     @PostMapping("/{contestId}")
     @Operation(
-            summary = "특정 대회에 대한 북마크를 추가합니다.",
-            description = "북마크하고자 하는 대회의 아이디를 경로로 전달합니다."
+            summary = "북마크를 추가합니다.",
+            description = "대회의 아이디를 경로로 전달합니다."
     )
     public ResponseEntity register(@PathVariable("contestId") Long contestId) {
         bookmarkService.register(contestId);
@@ -40,8 +39,8 @@ public class BookmarkController {
 
     @DeleteMapping("/{bookmarkId}")
     @Operation(
-            summary = "특정 대회에 대한 북마크를 삭제합니다.",
-            description = "북마크 삭제하고자 하는 대회의 아이디를 경로로 전달합니다."
+            summary = "북마크를 삭제합니다.",
+            description = "대회의 아이디를 경로로 전달합니다."
     )
     public ResponseEntity remove(@PathVariable("bookmarkId") Long bookmarkId) {
         bookmarkService.remove(bookmarkId);
@@ -50,7 +49,7 @@ public class BookmarkController {
 
     @GetMapping("/list")
     @Operation(
-            summary = "대회를 불러옵니다.",
+            summary = "대회를 조회합니다.",
             description = "인자는 없습니다."
     )
     public ResponseEntity list(BookmarkRequest request) {
