@@ -119,7 +119,7 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
     }
 
     private BooleanExpression containKeyword(String keyword) {
-        if (keyword == null) return null;
+        if (keyword == null || keyword.equals("")) return null;
         return containTitle(keyword).or(containContent(keyword));
     }
 
