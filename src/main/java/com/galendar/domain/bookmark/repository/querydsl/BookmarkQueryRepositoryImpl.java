@@ -36,7 +36,7 @@ public class BookmarkQueryRepositoryImpl implements BookmarkQueryRepository {
     }
 
     private BooleanExpression containTitle(String keyword) {
-        if (keyword == null) return null;
+        if (keyword == null || keyword.equals("")) return null;
         return contestEntity.title.contains(keyword);
     }
 

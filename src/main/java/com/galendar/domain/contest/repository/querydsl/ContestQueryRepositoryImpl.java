@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static com.galendar.domain.bookmark.entity.QBookmarkEntity.bookmarkEntity;
 import static com.galendar.domain.contest.entity.QContestEntity.contestEntity;
 import static com.galendar.domain.contest.entity.QContestRegionEntity.contestRegionEntity;
 import static com.galendar.domain.contest.entity.QContestTargetEntity.contestTargetEntity;
@@ -31,12 +32,13 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<ContestResponse> find(ContestRequest request) {
+    public List<ContestResponse> findWithBookmark(ContestRequest request, Long userId){
         return queryFactory
                 .select(contestProjection())
                 .from(contestEntity)
                 .innerJoin(contestEntity.contestTargets, contestTargetEntity)
                 .innerJoin(contestEntity.contestRegions, contestRegionEntity)
+                .leftJoin(bookmarkEntity).on(bookmarkEntity.contestEntity.eq(contestEntity).and(bookmarkEntity.userEntity.id.eq(userId)))
                 .where(
                         containKeyword(request.getKeyword()),
                         eqTargets(request.getTargets()),
@@ -52,11 +54,13 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
     }
 
     @Override
-    public Optional<ContestDetailResponse> findById(Long id) {
+    public Optional<ContestDetailResponse> findByIdWithBookmark(Long id, Long userId) {
+
         return queryFactory
                 .selectFrom(contestEntity)
                 .innerJoin(contestEntity.contestTargets, contestTargetEntity)
                 .innerJoin(contestEntity.contestRegions, contestRegionEntity)
+                .leftJoin(bookmarkEntity).on(bookmarkEntity.contestEntity.eq(contestEntity).and(bookmarkEntity.userEntity.id.eq(userId)))
                 .where(
                         eqId(id)
                 )
@@ -74,6 +78,7 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
                                         contestEntity.submitEndDate,
                                         contestEntity.contestStartDate,
                                         contestEntity.contestEndDate,
+                                        bookmarkEntity.isNotNull(),
                                         set(
                                                 Projections.constructor(
                                                         TargetDTO.class,
@@ -143,6 +148,7 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
                 contestEntity.cost,
                 contestEntity.link,
                 contestEntity.imgLink,
+                bookmarkEntity.isNotNull(),
                 contestEntity.submitStartDate,
                 contestEntity.submitEndDate,
                 contestEntity.contestStartDate,

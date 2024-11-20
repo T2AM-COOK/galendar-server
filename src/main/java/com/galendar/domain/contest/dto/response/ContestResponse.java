@@ -17,6 +17,7 @@ public class ContestResponse {
     private ContestCost cost;
     private String link;
     private String imgLink;
+    private boolean isBookmarked;
     private LocalDate submitStartDate;
     private LocalDate submitEndDate;
     private LocalDate contestStartDate;

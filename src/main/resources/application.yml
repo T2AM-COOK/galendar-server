@@ -18,8 +18,8 @@ spring:
 
   jwt:
     secret: d0dde67a111b6a000b2eeaedbf0756538051784a199e143f4b70043d628f9154
-    expiration: 900000  # 15min
-    refreshExpiration: 86400000 # 1day
+    expiration: 2592000000  # 15min : 900000
+    refreshExpiration: 2592000000 # 1day : 86400000
 
   mail:
     host: smtp.gmail.com

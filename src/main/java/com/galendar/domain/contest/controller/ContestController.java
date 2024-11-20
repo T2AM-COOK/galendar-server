@@ -28,7 +28,7 @@ public class ContestController {
     @Operation(summary = "대회 등록", description = "대회를 등록합니다.")
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("")
-    public ResponseEntity<ResponseData> register( @Validated @RequestBody RegisterContestRequest request) {
+    public ResponseEntity<ResponseData> register(@Validated @RequestBody RegisterContestRequest request) {
         contestService.register(request);
         return ResponseEntity.ok(ResponseData.ok("대회가 성공적으로 등록되었습니다."));
     }
@@ -42,7 +42,16 @@ public class ContestController {
 
     @Operation(summary = "특정 대회 검색", description = "검색하고자 하는 대회 아이디를 경로에 넣어주세요.")
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseData> get(@PathVariable("id") Long id){
+    public ResponseEntity<ResponseData> get(@PathVariable("id") Long id) {
         return ResponseEntity.ok(ResponseData.ok(contestQueryService.get(id), "조회 성공"));
     }
+
+    @Operation(summary = "대회 삭제", description = "")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseData> remove(@PathVariable("id") Long id) {
+        contestService.remove(id);
+        return ResponseEntity.ok(ResponseData.ok("대회가 성공적으로 삭제되었습니다."));
+    }
+
 }

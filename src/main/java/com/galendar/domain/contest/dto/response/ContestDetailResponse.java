@@ -4,13 +4,10 @@ import com.galendar.domain.contest.entity.enums.ContestCost;
 import com.galendar.domain.region.dto.RegionDTO;
 import com.galendar.domain.target.dto.TargetDTO;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -27,6 +24,7 @@ public class ContestDetailResponse {
     private LocalDate submitEndDate;
     private LocalDate contestStartDate;
     private LocalDate contestEndDate;
+    private boolean isBookmarked;
     private Set<TargetDTO> targets ;
     private Set<RegionDTO> regions ;
 }

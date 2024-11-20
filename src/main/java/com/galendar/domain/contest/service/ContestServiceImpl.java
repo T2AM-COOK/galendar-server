@@ -4,6 +4,7 @@ import com.galendar.domain.contest.dto.request.RegisterContestRequest;
 import com.galendar.domain.contest.entity.ContestEntity;
 import com.galendar.domain.contest.entity.ContestRegionEntity;
 import com.galendar.domain.contest.entity.ContestTargetEntity;
+import com.galendar.domain.contest.exception.ContestNotFoundException;
 import com.galendar.domain.contest.mapper.ContestMapper;
 import com.galendar.domain.contest.mapper.ContestRegionMapper;
 import com.galendar.domain.contest.mapper.ContestTargetMapper;
@@ -53,6 +54,14 @@ public class ContestServiceImpl implements ContestService {
         contestRepository.save(contestEntity);
         contestTargetRepository.saveAll(contestTargetEntities);
         contestRegionRepository.saveAll(contestRegionEntities);
+    }
+
+    @Override
+    public void remove(Long id) {
+        ContestEntity contestEntity = contestRepository.findById(id).orElseThrow(() -> ContestNotFoundException.EXCEPTION);
+        contestTargetRepository.deleteByContestEntity(contestEntity);
+        contestRegionRepository.deleteByContestEntity(contestEntity);
+        contestRepository.delete(contestEntity);
     }
 
 }

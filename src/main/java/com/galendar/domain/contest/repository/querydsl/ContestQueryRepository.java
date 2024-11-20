@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ContestQueryRepository {
-    List<ContestResponse> find(ContestRequest request);
+    List<ContestResponse> findWithBookmark(ContestRequest request, Long userId);
 
-    Optional<ContestDetailResponse> findById(Long id);
+    Optional<ContestDetailResponse> findByIdWithBookmark(Long id, Long userId);
 }
