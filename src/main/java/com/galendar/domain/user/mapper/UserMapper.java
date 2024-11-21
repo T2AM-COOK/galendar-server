@@ -1,6 +1,7 @@
 package com.galendar.domain.user.mapper;
 
 import com.galendar.domain.user.dto.User;
+import com.galendar.domain.user.dto.response.UserProfileResponse;
 import com.galendar.domain.user.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
@@ -21,4 +22,11 @@ public class UserMapper {
                 .build();
     }
 
+    public UserProfileResponse toProfileResponse(final User user) {
+        return UserProfileResponse.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .name(user.getName())
+                .build();
+    }
 }

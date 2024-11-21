@@ -20,8 +20,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @Tag(name = "인증", description = "인증 관련 api입니다.")
 @RestController
 @RequestMapping("/auth")
@@ -51,12 +49,4 @@ public class AuthController {
         return ResponseEntity.ok(ResponseData.ok(tokenResponse, "재발급 성공"));
     }
 
-    @Operation(summary = "사용자 정보 조회", description = "")
-    @GetMapping("/me")
-    public String getCurrentUser(Principal principal) {
-        if (principal instanceof CustomUserDetails) {
-            CustomUserDetails customUserDetails = (CustomUserDetails) principal;
-            User user = customUserDetails.getUser();
-        }
-    }
 }

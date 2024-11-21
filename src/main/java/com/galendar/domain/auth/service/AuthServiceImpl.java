@@ -78,8 +78,4 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
-    public User getCurrentUser() {
-
-    }
-
 }
