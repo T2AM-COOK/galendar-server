@@ -1,4 +1,4 @@
-package com.galendar.domain.firebase.dto;
+package com.galendar.global.firebase.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,4 +27,5 @@ public class FcmMessage {
         private String body;
         private String image;
     }
+
 }
