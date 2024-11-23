@@ -1,5 +1,6 @@
 package com.galendar.domain.contest.service;
 
+import com.galendar.domain.bookmark.repository.BookmarkRepository;
 import com.galendar.domain.contest.dto.request.RegisterContestRequest;
 import com.galendar.domain.contest.entity.ContestEntity;
 import com.galendar.domain.contest.entity.ContestRegionEntity;
@@ -33,6 +34,7 @@ public class ContestServiceImpl implements ContestService {
     private final ContestRepository contestRepository;
     private final ContestTargetRepository contestTargetRepository;
     private final ContestRegionRepository contestRegionRepository;
+    private final BookmarkRepository bookmarkRepository;
 
     private final ContestMapper contestMapper;
     private final TargetMapper targetMapper;
@@ -61,6 +63,7 @@ public class ContestServiceImpl implements ContestService {
         ContestEntity contestEntity = contestRepository.findById(id).orElseThrow(() -> ContestNotFoundException.EXCEPTION);
         contestTargetRepository.deleteByContestEntity(contestEntity);
         contestRegionRepository.deleteByContestEntity(contestEntity);
+        bookmarkRepository.deleteByContestEntity(contestEntity);
         contestRepository.delete(contestEntity);
     }
 

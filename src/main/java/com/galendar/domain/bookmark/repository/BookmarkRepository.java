@@ -8,5 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface BookmarkRepository extends JpaRepository<BookmarkEntity, Long> {
     boolean existsByUserEntityAndContestEntity(UserEntity userEntity, ContestEntity contestEntity);
     boolean existsByIdAndUserEntity(Long id, UserEntity userEntity);
+    void deleteByContestEntity(ContestEntity contestEntity);
 
 }
