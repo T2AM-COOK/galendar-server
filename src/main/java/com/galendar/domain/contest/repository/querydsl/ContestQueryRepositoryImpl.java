@@ -3,6 +3,8 @@ package com.galendar.domain.contest.repository.querydsl;
 import com.galendar.domain.contest.dto.request.ContestRequest;
 import com.galendar.domain.contest.dto.response.ContestDetailResponse;
 import com.galendar.domain.contest.dto.response.ContestResponse;
+import com.galendar.domain.contest.entity.ContestEntity;
+import com.galendar.domain.contest.entity.QContestEntity;
 import com.galendar.domain.region.dto.RegionDTO;
 import com.galendar.domain.target.dto.TargetDTO;
 import com.querydsl.core.types.ConstructorExpression;
@@ -29,6 +31,15 @@ import static com.querydsl.core.group.GroupBy.set;
 public class ContestQueryRepositoryImpl implements ContestQueryRepository {
 
     private final JPAQueryFactory queryFactory;
+
+    public List<ContestEntity> findContestsBySubmitEndDates(List<LocalDate> deadlineDates) {
+        QContestEntity contest = QContestEntity.contestEntity;
+
+        return queryFactory
+                .selectFrom(contest)
+                .where(isSubmitEndDateIn(deadlineDates))
+                .fetch();
+    }
 
     @Override
     public List<ContestResponse> find(ContestRequest request) {
@@ -91,6 +102,13 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
                                 )
                         )
                 ).stream().findFirst();
+    }
+
+    private BooleanExpression isSubmitEndDateIn(List<LocalDate> deadlineDates) {
+        if (deadlineDates == null || deadlineDates.isEmpty()) {
+            return null;
+        }
+        return contestEntity.submitEndDate.in(deadlineDates);
     }
 
     private BooleanExpression eqId(Long id) {
