@@ -4,8 +4,6 @@ import com.galendar.domain.contest.dto.request.ContestRequest;
 import com.galendar.domain.contest.dto.response.ContestDeadlineResponse;
 import com.galendar.domain.contest.dto.response.ContestDetailResponse;
 import com.galendar.domain.contest.dto.response.ContestResponse;
-import com.galendar.domain.contest.entity.ContestEntity;
-import com.galendar.domain.contest.entity.QContestEntity;
 import com.galendar.domain.region.dto.RegionDTO;
 import com.galendar.domain.target.dto.TargetDTO;
 import com.querydsl.core.types.ConstructorExpression;
@@ -35,14 +33,15 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<ContestDeadlineResponse> findContestsBySubmitEndDate(List dates) {
+    @Override
+    public List<ContestDeadlineResponse> findContestsBySubmitEndDates(List deadlineDates) {
         return queryFactory
                 .select(contestDeadlineProjection())
                 .from(contestEntity)
                 .innerJoin(bookmarkEntity).on(bookmarkEntity.contestEntity.eq(contestEntity))
                 .innerJoin(bookmarkEntity.userEntity, userEntity)
                 .where(
-                        inSubmitEndDate(dates)
+                        isSubmitEndDateIn(deadlineDates)
                 ).fetch();
     }
 
@@ -109,10 +108,8 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
                 ).stream().findFirst();
     }
 
-    private BooleanExpression isSubmitEndDateIn(List<LocalDate> deadlineDates) {
-        if (deadlineDates == null || deadlineDates.isEmpty()) {
-            return null;
-        }
+    private BooleanExpression isSubmitEndDateIn(List deadlineDates) {
+        if (deadlineDates == null || deadlineDates.isEmpty()) return null;
         return contestEntity.submitEndDate.in(deadlineDates);
     }
 
@@ -129,11 +126,6 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
     private BooleanExpression afterSubmitStartDate(LocalDate submitStartDate) {
         if (submitStartDate == null) return null;
         return contestEntity.submitStartDate.goe(submitStartDate);
-    }
-
-    private BooleanExpression inSubmitEndDate(List dates) {
-        if (dates == null || dates.isEmpty()) return null;
-        return contestEntity.submitEndDate.in(dates);
     }
 
     private BooleanExpression eqRegions(List<Long> regions) {

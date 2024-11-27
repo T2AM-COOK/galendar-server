@@ -31,7 +31,7 @@ public class ContestQueryServiceImpl implements ContestQueryService {
 
     @Override
     public List<ContestDeadlineResponse> findContestsBySubmitEndDate(List dates) {
-        return contestQueryRepository.findContestsBySubmitEndDate(dates);
+        return contestQueryRepository.findContestsBySubmitEndDates(dates);
     }
 
 
