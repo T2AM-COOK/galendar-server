@@ -20,8 +20,7 @@ public class FirebaseServiceImpl implements FirebaseService {
     public void sendMessage(String token, String title, String body) {
         Message message = createMessage(token, title, body);
         try {
-            String response = firebaseMessaging.send(message);
-            log.debug("response : {}", response);
+            firebaseMessaging.send(message);
         } catch (FirebaseMessagingException e) {
         }
     }

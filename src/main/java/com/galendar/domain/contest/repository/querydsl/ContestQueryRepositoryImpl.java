@@ -1,6 +1,7 @@
 package com.galendar.domain.contest.repository.querydsl;
 
 import com.galendar.domain.contest.dto.request.ContestRequest;
+import com.galendar.domain.contest.dto.response.ContestDeadlineResponse;
 import com.galendar.domain.contest.dto.response.ContestDetailResponse;
 import com.galendar.domain.contest.dto.response.ContestResponse;
 import com.galendar.domain.region.dto.RegionDTO;
@@ -16,11 +17,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static com.galendar.domain.bookmark.entity.QBookmarkEntity.bookmarkEntity;
 import static com.galendar.domain.contest.entity.QContestEntity.contestEntity;
 import static com.galendar.domain.contest.entity.QContestRegionEntity.contestRegionEntity;
 import static com.galendar.domain.contest.entity.QContestTargetEntity.contestTargetEntity;
 import static com.galendar.domain.region.entity.QRegionEntity.regionEntity;
 import static com.galendar.domain.target.entity.QTargetEntity.targetEntity;
+import static com.galendar.domain.user.entity.QUserEntity.userEntity;
 import static com.querydsl.core.group.GroupBy.groupBy;
 import static com.querydsl.core.group.GroupBy.set;
 
@@ -29,6 +32,17 @@ import static com.querydsl.core.group.GroupBy.set;
 public class ContestQueryRepositoryImpl implements ContestQueryRepository {
 
     private final JPAQueryFactory queryFactory;
+
+    public List<ContestDeadlineResponse> findContestsBySubmitEndDate(List dates) {
+        return queryFactory
+                .select(contestDeadlineProjection())
+                .from(contestEntity)
+                .innerJoin(bookmarkEntity).on(bookmarkEntity.contestEntity.eq(contestEntity))
+                .innerJoin(bookmarkEntity.userEntity, userEntity)
+                .where(
+                        inSubmitEndDate(dates)
+                ).fetch();
+    }
 
     @Override
     public List<ContestResponse> find(ContestRequest request) {
@@ -108,6 +122,11 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
         return contestEntity.submitStartDate.goe(submitStartDate);
     }
 
+    private BooleanExpression inSubmitEndDate(List dates) {
+        if (dates == null || dates.isEmpty()) return null;
+        return contestEntity.submitEndDate.in(dates);
+    }
+
     private BooleanExpression eqRegions(List<Long> regions) {
         if (regions == null) return null;
         return contestRegionEntity.regionEntity.id.in(regions);
@@ -147,6 +166,17 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
                 contestEntity.submitEndDate,
                 contestEntity.contestStartDate,
                 contestEntity.contestEndDate
+        );
+    }
+
+    private ConstructorExpression<ContestDeadlineResponse> contestDeadlineProjection() {
+        return Projections.constructor(
+                ContestDeadlineResponse.class,
+                contestEntity.id,
+                contestEntity.title,
+                userEntity.email,
+                contestEntity.submitStartDate,
+                contestEntity.submitEndDate
         );
     }
 

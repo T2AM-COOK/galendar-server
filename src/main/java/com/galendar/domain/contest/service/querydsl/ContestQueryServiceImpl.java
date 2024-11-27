@@ -1,6 +1,7 @@
 package com.galendar.domain.contest.service.querydsl;
 
 import com.galendar.domain.contest.dto.request.ContestRequest;
+import com.galendar.domain.contest.dto.response.ContestDeadlineResponse;
 import com.galendar.domain.contest.dto.response.ContestDetailResponse;
 import com.galendar.domain.contest.dto.response.ContestResponse;
 import com.galendar.domain.contest.exception.ContestNotFoundException;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,4 +28,11 @@ public class ContestQueryServiceImpl implements ContestQueryService {
     public ContestDetailResponse get(Long id) {
         return contestQueryRepository.findById(id).orElseThrow(() -> ContestNotFoundException.EXCEPTION);
     }
+
+    @Override
+    public List<ContestDeadlineResponse> findContestsBySubmitEndDate(List dates) {
+        return contestQueryRepository.findContestsBySubmitEndDate(dates);
+    }
+
+
 }
