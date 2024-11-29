@@ -38,6 +38,19 @@ spring:
           writetimeout: 5000
           ssl:
             trust: smtp.gmail.com
+
+  cloud:
+    aws:
+      s3:
+        bucket: lift-s3-bucket
+      region:
+        static: ap-northeast-2
+      credentials:
+        access-key: ${AWS_ACCESS_KEY}
+        secret-key: ${AWS_SECRET_KEY}
+      stack:
+        auto: false
+
 crawling:
   contest-korea:
     base-url: https://www.contestkorea.com

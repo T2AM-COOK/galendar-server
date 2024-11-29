@@ -31,4 +31,6 @@ nohup java -jar \
     -Dspring.profiles.active=$IDLE_PROFILE \
     -DEMAIL_PASSWORD="hwvt jjxa qipu jyci" \
     -DEMAIL_USERNAME="siwon0876@gmail.com" \
+    -DAWS_ACCESS_KEY="AKIA4J3VX2R65LRGD3X6" \
+    -DAWS_SECRET_KEY="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" \
     $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
