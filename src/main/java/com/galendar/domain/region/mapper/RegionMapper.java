@@ -3,8 +3,6 @@ package com.galendar.domain.region.mapper;
 import com.galendar.domain.region.dto.RegionDTO;
 import com.galendar.domain.region.dto.request.RegisterRegionRequest;
 import com.galendar.domain.region.entity.RegionEntity;
-import com.galendar.domain.target.dto.request.RegisterTargetRequest;
-import com.galendar.domain.target.entity.TargetEntity;
 import org.springframework.stereotype.Component;
 
 @Component

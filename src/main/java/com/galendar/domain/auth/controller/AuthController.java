@@ -5,20 +5,16 @@ import com.galendar.domain.auth.dto.request.RefreshTokenRequest;
 import com.galendar.domain.auth.dto.request.SignupRequest;
 import com.galendar.domain.auth.dto.response.JsonWebTokenResponse;
 import com.galendar.domain.auth.service.AuthService;
-import com.galendar.domain.auth.service.AuthServiceImpl;
-import com.galendar.domain.user.dto.User;
-import com.galendar.domain.user.entity.UserEntity;
-import com.galendar.domain.user.repository.UserRepository;
 import com.galendar.global.common.dto.response.ResponseData;
-import com.galendar.global.security.CustomUserDetails;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "인증", description = "인증 관련 api입니다.")
 @RestController

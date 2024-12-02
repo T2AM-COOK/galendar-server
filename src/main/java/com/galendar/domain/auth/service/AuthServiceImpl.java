@@ -4,7 +4,6 @@ import com.galendar.domain.auth.dto.request.AuthenticationRequest;
 import com.galendar.domain.auth.dto.request.RefreshTokenRequest;
 import com.galendar.domain.auth.dto.request.SignupRequest;
 import com.galendar.domain.auth.dto.response.JsonWebTokenResponse;
-import com.galendar.domain.email.entity.EmailEntity;
 import com.galendar.domain.email.exception.EmailNotVerifiedException;
 import com.galendar.domain.email.repository.EmailRepository;
 import com.galendar.domain.user.dto.User;

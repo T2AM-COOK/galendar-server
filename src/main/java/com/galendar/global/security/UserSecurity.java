@@ -2,8 +2,6 @@ package com.galendar.global.security;
 
 import com.galendar.domain.user.dto.User;
 import com.galendar.domain.user.entity.UserEntity;
-import com.galendar.domain.user.mapper.UserMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
