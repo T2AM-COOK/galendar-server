@@ -44,3 +44,13 @@ crawling:
     subject-url: /sub/
     it-list-url: list.php?int_gbn=1&Txt_bcode=030510001
     days-to-search: 3
+
+cloud:
+  aws:
+    s3:
+      bucket: ${BUCKET_NAME}
+    stack.auto: false
+    region.static: ${S3_REGION}
+    credentials:
+      accessKey: ${S3_ACCESS_KEY}
+      secretKey: ${S3_SECRET_KEY}
