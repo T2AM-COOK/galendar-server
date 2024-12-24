@@ -1,6 +1,5 @@
 package com.galendar.domain.auth.dto.request;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,5 +14,7 @@ public class AuthenticationRequest {
 
     @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
+
+    private String fcmToken;
 
 }

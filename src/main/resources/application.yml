@@ -16,6 +16,11 @@ spring:
         format_sql: true
     show-sql: true
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
   jwt:
     secret: d0dde67a111b6a000b2eeaedbf0756538051784a199e143f4b70043d628f9154
     expiration: 2592000000  # 15min : 900000
@@ -57,3 +62,14 @@ crawling:
     subject-url: /sub/
     it-list-url: list.php?int_gbn=1&Txt_bcode=030510001
     days-to-search: 3
+
+firebase:
+  sdk:
+    path: firebase/firebase_service_key.json
+  messages:
+    D-3:
+      title: "📢 마감 3일 전! 지금 바로 지원하세요!"
+      body: "시간이 얼마 남지 않았습니다! ${contestTitle}의 접수는 3일 후에 마감됩니다!"
+    D-1:
+      title: "🚨 놓치면 끝! 접수 마감 D-DAY!"
+      body: "모든 것이 준비됐습니다. 이제 당신의 도전만 남았습니다. ${contestTitle} 접수가 오늘까지 진행됩니다. 힘내세요!"

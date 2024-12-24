@@ -1,6 +1,7 @@
 package com.galendar.domain.contest.repository.querydsl;
 
 import com.galendar.domain.contest.dto.request.ContestRequest;
+import com.galendar.domain.contest.dto.response.ContestDeadlineResponse;
 import com.galendar.domain.contest.dto.response.ContestDetailResponse;
 import com.galendar.domain.contest.dto.response.ContestResponse;
 import com.galendar.domain.region.dto.RegionDTO;
@@ -22,6 +23,7 @@ import static com.galendar.domain.contest.entity.QContestRegionEntity.contestReg
 import static com.galendar.domain.contest.entity.QContestTargetEntity.contestTargetEntity;
 import static com.galendar.domain.region.entity.QRegionEntity.regionEntity;
 import static com.galendar.domain.target.entity.QTargetEntity.targetEntity;
+import static com.galendar.domain.user.entity.QUserEntity.userEntity;
 import static com.querydsl.core.group.GroupBy.groupBy;
 import static com.querydsl.core.group.GroupBy.set;
 
@@ -32,7 +34,7 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<ContestResponse> findWithBookmark(ContestRequest request, Long userId){
+    public List<ContestResponse> findWithBookmark(ContestRequest request, Long userId) {
         return queryFactory
                 .select(contestProjection())
                 .from(contestEntity)
@@ -55,7 +57,6 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
 
     @Override
     public Optional<ContestDetailResponse> findByIdWithBookmark(Long id, Long userId) {
-
         return queryFactory
                 .selectFrom(contestEntity)
                 .innerJoin(contestEntity.contestTargets, contestTargetEntity)
@@ -96,6 +97,22 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
                                 )
                         )
                 ).stream().findFirst();
+    }
+
+    public List<ContestDeadlineResponse> findContestsBySubmitEndDates(List deadlineDates) {
+        return queryFactory
+                .select(contestDeadlineProjection())
+                .from(contestEntity)
+                .innerJoin(bookmarkEntity).on(bookmarkEntity.contestEntity.eq(contestEntity))
+                .innerJoin(bookmarkEntity.userEntity, userEntity)
+                .where(
+                        isSubmitEndDateIn(deadlineDates)
+                ).fetch();
+    }
+
+    private BooleanExpression isSubmitEndDateIn(List deadlineDates) {
+        if (deadlineDates == null || deadlineDates.isEmpty()) return null;
+        return contestEntity.submitEndDate.in(deadlineDates);
     }
 
     private BooleanExpression eqId(Long id) {
@@ -153,6 +170,17 @@ public class ContestQueryRepositoryImpl implements ContestQueryRepository {
                 contestEntity.submitEndDate,
                 contestEntity.contestStartDate,
                 contestEntity.contestEndDate
+        );
+    }
+
+    private ConstructorExpression<ContestDeadlineResponse> contestDeadlineProjection() {
+        return Projections.constructor(
+                ContestDeadlineResponse.class,
+                contestEntity.id,
+                contestEntity.title,
+                userEntity.email,
+                contestEntity.submitStartDate,
+                contestEntity.submitEndDate
         );
     }
 

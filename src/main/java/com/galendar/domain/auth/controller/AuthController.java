@@ -10,7 +10,7 @@ import com.galendar.domain.user.dto.User;
 import com.galendar.domain.user.entity.UserEntity;
 import com.galendar.domain.user.repository.UserRepository;
 import com.galendar.global.common.dto.response.ResponseData;
-import com.galendar.global.security.CustomUserDetails;
+import com.galendar.global.firebase.service.FcmTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
-
+    private final FcmTokenService fcmTokenService;
     @Operation(summary = "회원 가입", description = "회원가입을 처리합니다.")
     @PostMapping("/signup")
     public ResponseEntity<ResponseData<String>> signup(@Validated @RequestBody SignupRequest request) {
@@ -39,6 +39,7 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<ResponseData<JsonWebTokenResponse>> auth(@Validated @RequestBody AuthenticationRequest request) {
         JsonWebTokenResponse tokenResponse = authService.auth(request);
+        fcmTokenService.register(request.getEmail(), request.getFcmToken());
         return ResponseEntity.ok(ResponseData.ok(tokenResponse, "로그인 성공"));
     }
 
