@@ -1,1 +1,23 @@
 # galendar-server
+<img width="960" alt="슬라이드1" src="https://github.com/user-attachments/assets/025f7cc7-f946-49ef-bbdd-bfd4065f530f" />
+<img width="960" alt="슬라이드2" src="https://github.com/user-attachments/assets/7c3c7cd8-5818-4484-99bf-fecb94356084" />
+<img width="960" alt="슬라이드3" src="https://github.com/user-attachments/assets/8eb83339-2a76-4e96-8a05-553293045b2f" />
+<img width="960" alt="슬라이드4" src="https://github.com/user-attachments/assets/3b05a610-5007-402e-922d-cd07be2756a7" />
+<img width="960" alt="슬라이드5" src="https://github.com/user-attachments/assets/f1d3d689-07a5-453e-a5e1-7b7006402536" />
+<img width="960" alt="슬라이드6" src="https://github.com/user-attachments/assets/ef5e648f-4f35-4482-98a3-d0b34079f011" />
+<img width="960" alt="슬라이드7" src="https://github.com/user-attachments/assets/2b892e67-399a-4102-90bf-377f23db7468" />
+<img width="960" alt="슬라이드8" src="https://github.com/user-attachments/assets/76140ea0-c744-4497-a5eb-ce653f9624ff" />
+<img width="960" alt="슬라이드9" src="https://github.com/user-attachments/assets/25ea20cf-8cdb-4fe7-a822-0c4243b71ad2" />
+<img width="960" alt="슬라이드10" src="https://github.com/user-attachments/assets/f026a08d-e10b-444b-aa5b-1fb449391112" />
+<img width="960" alt="슬라이드11" src="https://github.com/user-attachments/assets/998ffb3b-4419-47fe-aa41-1dec47f004b4" />
+<img width="960" alt="슬라이드12" src="https://github.com/user-attachments/assets/ec73e112-45f4-4b1b-b9bc-0255157b6edf" />
+<img width="960" alt="슬라이드13" src="https://github.com/user-attachments/assets/e7f7d0ab-d574-4d1c-8526-bf1da329517d" />
+<img width="960" alt="슬라이드14" src="https://github.com/user-attachments/assets/8780d39a-6ead-49f8-b654-46b5c6ce0d90" />
+<img width="960" alt="슬라이드15" src="https://github.com/user-attachments/assets/c9fb851c-e2f1-473b-aefe-aae887c0d331" />
+<img width="960" alt="슬라이드16" src="https://github.com/user-attachments/assets/8079e0b2-4ddb-46e4-87e7-c523a78b4b4b" />
+<img width="960" alt="슬라이드17" src="https://github.com/user-attachments/assets/bd57cd81-1f09-4076-9c42-08f38f291c7b" />
+<img width="960" alt="슬라이드18" src="https://github.com/user-attachments/assets/90c74713-2b9e-41a8-8122-6ecb82197361" />
+<img width="960" alt="슬라이드19" src="https://github.com/user-attachments/assets/66b6e5d4-d6a7-49ea-8160-ad6b168d9943" />
+<img width="960" alt="슬라이드20" src="https://github.com/user-attachments/assets/1d11248d-9252-434d-aa28-0c223b34ae09" />
+<img width="960" alt="슬라이드21" src="https://github.com/user-attachments/assets/caf62771-5c54-4d2b-bb7d-4b12c5af7849" />
+<img width="960" alt="슬라이드22" src="https://github.com/user-attachments/assets/a7fbb917-84c2-4018-a518-daa9638fcc21" />
