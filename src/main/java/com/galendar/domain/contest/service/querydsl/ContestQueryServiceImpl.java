@@ -1,6 +1,7 @@
 package com.galendar.domain.contest.service.querydsl;
 
 import com.galendar.domain.contest.dto.request.ContestRequest;
+import com.galendar.domain.contest.dto.response.ContestDeadlineResponse;
 import com.galendar.domain.contest.dto.response.ContestDetailResponse;
 import com.galendar.domain.contest.dto.response.ContestResponse;
 import com.galendar.domain.contest.exception.ContestNotFoundException;
@@ -29,5 +30,11 @@ public class ContestQueryServiceImpl implements ContestQueryService {
     public ContestDetailResponse get(Long id) {
         return contestQueryRepository.findByIdWithBookmark(id, userSecurity.getUser().getId()).orElseThrow(() -> ContestNotFoundException.EXCEPTION);
     }
+
+    @Override
+    public List<ContestDeadlineResponse> findContestsBySubmitEndDate(List dates) {
+        return contestQueryRepository.findContestsBySubmitEndDates(dates);
+    }
+
 
 }

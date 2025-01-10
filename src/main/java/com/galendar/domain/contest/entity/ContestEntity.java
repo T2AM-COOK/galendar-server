@@ -34,6 +34,7 @@ public class ContestEntity extends BaseTimeEntity {
     @OneToMany(mappedBy = "contestEntity", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<ContestRegionEntity> contestRegions = new ArrayList<>();
 
+    @Column(nullable = false, unique = true)
     private String strNo;
 
     @NotNull

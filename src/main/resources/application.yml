@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/galendar
-    username: galendar
-    password: Galander123!@#
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -16,10 +16,15 @@ spring:
         format_sql: true
     show-sql: true
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
   jwt:
-    secret: d0dde67a111b6a000b2eeaedbf0756538051784a199e143f4b70043d628f9154
-    expiration: 2592000000  # 15min : 900000
-    refreshExpiration: 2592000000 # 1day : 86400000
+    secret: ${JWT_SECRET}
+    expiration: ${ACCESS_EXPIRATION}  # 15min : 900000
+    refreshExpiration: ${REFRESH_EXPIRATION} # 1day : 86400000
 
   mail:
     host: smtp.gmail.com
@@ -67,3 +72,14 @@ cloud:
     credentials:
       accessKey: ${S3_ACCESS_KEY}
       secretKey: ${S3_SECRET_KEY}
+
+firebase:
+  sdk:
+    path: firebase/firebase_service_key.json
+  messages:
+    D-3:
+      title: "📢 마감 3일 전! 지금 바로 지원하세요!"
+      body: "시간이 얼마 남지 않았습니다! ${contestTitle}의 접수는 3일 후에 마감됩니다!"
+    D-1:
+      title: "🚨 놓치면 끝! 접수 마감 D-DAY!"
+      body: "모든 것이 준비됐습니다. 이제 당신의 도전만 남았습니다. ${contestTitle} 접수가 오늘까지 진행됩니다. 힘내세요!"
