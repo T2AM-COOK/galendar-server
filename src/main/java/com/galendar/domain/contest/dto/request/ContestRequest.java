@@ -1,6 +1,5 @@
 package com.galendar.domain.contest.dto.request;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -3,7 +3,6 @@ package com.galendar.domain.contest.mapper;
 import com.galendar.domain.contest.dto.request.RegisterContestRequest;
 import com.galendar.domain.contest.entity.ContestEntity;
 import com.galendar.domain.user.entity.UserEntity;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,9 +1,5 @@
 package com.galendar.domain.target.mapper;
 
-import com.galendar.domain.contest.dto.request.RegisterContestRequest;
-import com.galendar.domain.contest.entity.ContestEntity;
-import com.galendar.domain.region.dto.RegionDTO;
-import com.galendar.domain.region.entity.RegionEntity;
 import com.galendar.domain.target.dto.TargetDTO;
 import com.galendar.domain.target.dto.request.RegisterTargetRequest;
 import com.galendar.domain.target.entity.TargetEntity;

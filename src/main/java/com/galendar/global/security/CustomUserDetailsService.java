@@ -1,7 +1,6 @@
 package com.galendar.global.security;
 
 import com.galendar.domain.user.dto.User;
-import com.galendar.domain.user.entity.UserEntity;
 import com.galendar.domain.user.exception.UserNotFoundException;
 import com.galendar.domain.user.mapper.UserMapper;
 import com.galendar.domain.user.repository.UserRepository;

@@ -1,7 +1,6 @@
 package com.galendar.global.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.galendar.global.exception.CustomException;
 import com.galendar.global.exception.response.ErrorResponse;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

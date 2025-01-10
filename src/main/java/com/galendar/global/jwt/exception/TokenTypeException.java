@@ -1,6 +1,5 @@
 package com.galendar.global.jwt.exception;
 
-import com.galendar.domain.user.exception.UserNotFoundException;
 import com.galendar.global.exception.CustomException;
 
 public class TokenTypeException extends CustomException {
