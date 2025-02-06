@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/galendar
-    username: galendar
-    password: Galander123!@#
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -22,9 +22,9 @@ spring:
       port: 6379
 
   jwt:
-    secret: d0dde67a111b6a000b2eeaedbf0756538051784a199e143f4b70043d628f9154
-    expiration: 2592000000  # 15min : 900000
-    refreshExpiration: 2592000000 # 1day : 86400000
+    secret: ${JWT_SECRET}
+    expiration: ${ACCESS_EXPIRATION}  # 15min : 900000
+    refreshExpiration: ${REFRESH_EXPIRATION} # 1day : 86400000
 
   mail:
     host: smtp.gmail.com
