@@ -1,6 +1,6 @@
 # galendar-server
 <div>
-  이 프로젝트는 2024학년도 1학년 소프트웨어로 나르샤 프로젝트 우수작 2위로 선정되었습니다.
+  🏆 이 프로젝트는 2024학년도 1학년 소프트웨어로 나르샤 프로젝트 우수작 2위로 선정되었습니다.
 </div>
 <img width="960" alt="슬라이드1" src="https://github.com/user-attachments/assets/2ce3474d-2907-429b-811b-d4f7fc9b7069" />
 <img width="960" alt="슬라이드2" src="https://github.com/user-attachments/assets/c23ab016-136e-4789-87e7-bfea9d95106b" />

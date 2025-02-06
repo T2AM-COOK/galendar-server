@@ -1,6 +1,5 @@
 package com.galendar.domain.email.exception;
 
-import com.galendar.domain.user.exception.UserNotFoundException;
 import com.galendar.global.exception.CustomException;
 
 public class EmailNotVerifiedException extends CustomException {

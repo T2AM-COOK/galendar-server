@@ -1,6 +1,5 @@
 package com.galendar.domain.target.service;
 
-import com.galendar.domain.region.dto.RegionDTO;
 import com.galendar.domain.target.dto.TargetDTO;
 import com.galendar.domain.target.dto.request.RegisterTargetRequest;
 

@@ -1,7 +1,6 @@
 package com.galendar.global.jwt.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.galendar.global.exception.CustomException;
 import com.galendar.global.exception.response.ErrorResponse;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
